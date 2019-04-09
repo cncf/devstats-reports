@@ -4,13 +4,6 @@ Various reports generated from DevStats databases
 
 # Running reports
 
+- For available reports, do: `ls sql/`. Use any file without `.sql` extension, for example: developers, issues, prs, commits etc.
+- Running single report: `PG_PASS=...  ./sh/run.sh (developers|issues|prs|..|contributing_companies_list) 2016-01-01 2017-01-01`.
 - Running report for multiple date ranges: `[SKIPDT=1] PG_PASS=... ./sh/rep.sh (quarters|years|join) (developers|developers_count|...|contributing_companies_list)`
-- Developers details: `PG_PASS=... ./sh/developers.sh 2016-01-01 2017-01-01`.
-- Developers count: `PG_PASS=... ./sh/developers_count.sh 2016-01-01 2017-01-01`.
-- Developers list: `PG_PASS=... ./sh/developers_list.sh 2016-01-01 2017-01-01`.
-- Contributing companies details: `PG_PASS=... ./sh/contributing_companies.sh 2016-01-01 2017-01-01`.
-- Contributing companies count: `PG_PASS=... ./sh/contributing_companies_count.sh 2016-01-01 2017-01-01`.
-- Contributing companies list: `PG_PASS=... ./sh/contributing_companies_list.sh 2016-01-01 2017-01-01`.
-- Number of contributions: `PG_PASS=... ./sh/contributions.sh 2016-01-01 2017-01-01`.
-- Number of opened PRs: `PG_PASS=... ./sh/prs.sh 2016-01-01 2017-01-01`.
-- Number of opened issues: `PG_PASS=... ./sh/issues.sh 2016-01-01 2017-01-01`.
