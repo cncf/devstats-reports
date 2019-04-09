@@ -11,3 +11,4 @@ Various reports generated from DevStats databases
 - Contributing companies details: `PG_PASS=... ./sh/contributing_companies.sh 2016-01-01 2017-01-01`.
 - Contributing companies count: `PG_PASS=... ./sh/contributing_companies_count.sh 2016-01-01 2017-01-01`.
 - Contributing companies list: `PG_PASS=... ./sh/contributing_companies_list.sh 2016-01-01 2017-01-01`.
+- Number of contributions: `PG_PASS=... ./sh/contributions.sh 2016-01-01 2017-01-01`.
