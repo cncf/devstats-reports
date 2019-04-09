@@ -1,4 +1,5 @@
 #!/bin/bash
+# SKIPDT=1 - skip from,to ranges in the final out.csv output file.
 if [ -z "$PG_PASS" ]
 then
   echo "$0: you need to set PG_PASS=..."
@@ -46,12 +47,20 @@ do
   if [ -z "$hdr" ]
   then
     hdr=`head -n 1 "${ary[0]}_${ary[1]}.csv"`
-    hdr="from,to,${hdr}"
+    if [ -z "$SKIPDT" ]
+    then
+      hdr="from,to,${hdr}"
+    fi
     echo $hdr > out.csv
   fi
   rows=`tail -n +2 "${ary[0]}_${ary[1]}.csv"`
   for row in $rows
   do
-    echo "${ary[0]},${ary[1]},$row" >> out.csv
+    if [ -z "$SKIPDT" ]
+    then
+      echo "${ary[0]},${ary[1]},$row" >> out.csv
+    else
+      echo "$row" >> out.csv
+    fi
   done
 done
