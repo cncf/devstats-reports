@@ -1,6 +1,5 @@
 select
-  dup_actor_login as contributor,
-  count(id) as contributions
+  count(distinct dup_actor_login) as contributors
 from
   gha_events
 where
@@ -11,9 +10,4 @@ where
     'PushEvent', 'PullRequestEvent', 'IssuesEvent',
     'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
   )
-group by
-  dup_actor_login
-order by
-  contributions desc,
-  contributor asc
 ;
