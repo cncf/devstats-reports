@@ -29,5 +29,8 @@ do
     echo $hdr > out.csv
   fi
   rows=`tail -n +2 "${ary[0]}_${ary[1]}.csv"`
-  echo "${ary[0]},${ary[1]},$rows" >> out.csv
+  for row in $rows
+  do
+    echo "${ary[0]},${ary[1]},$row" >> out.csv
+  done
 done
