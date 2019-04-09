@@ -13,3 +13,4 @@ Various reports generated from DevStats databases
 - Contributing companies list: `PG_PASS=... ./sh/contributing_companies_list.sh 2016-01-01 2017-01-01`.
 - Number of contributions: `PG_PASS=... ./sh/contributions.sh 2016-01-01 2017-01-01`.
 - Number of opened PRs: `PG_PASS=... ./sh/prs.sh 2016-01-01 2017-01-01`.
+- Number of opened issues: `PG_PASS=... ./sh/issues.sh 2016-01-01 2017-01-01`.
