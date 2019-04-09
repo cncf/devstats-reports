@@ -1,5 +1,5 @@
 select
-  distinct dup_committer_login as committer,
+  dup_committer_login as committer,
   count(distinct sha) as commits
 from
   gha_commits
