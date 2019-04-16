@@ -19,4 +19,4 @@ then
   echo "$0: you need to provide 3rd date-to in YYYY-MM-DD format"
   exit 4
 fi
-GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_SKIPLOG=1 runq "sql/${1}.sql" {{dtfrom}} "${2}" {{dtto}} "${3}" {{exclude_bots}} "`cat ~/dev/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql`" ${@:4:99}
+GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_SKIPLOG=1 runq "sql/${1}.sql" {{dtfrom}} "${2}" {{dtto}} "${3}" {{exclude_bots}} "`cat ~/dev/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql`" "${@:4:99}"

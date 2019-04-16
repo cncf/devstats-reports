@@ -37,7 +37,7 @@ do
   row=${row//:/ }
   ary=($row)
   echo "Range ${ary[0]} ${ary[1]}"
-  GHA2DB_CSVOUT="${ary[0]}_${ary[1]}.csv" ./sh/run.sh "${2}" "${ary[0]}" "${ary[1]}" ${@:3:99}
+  GHA2DB_CSVOUT="${ary[0]}_${ary[1]}.csv" ./sh/run.sh "${2}" "${ary[0]}" "${ary[1]}" "${@:3:99}"
 done
 hdr=''
 for row in $data
