@@ -1,5 +1,6 @@
 #!/bin/bash
 # SKIPDT=1 - skip from,to ranges in the final out.csv output file.
+# CUMULATIVE=2015-01-01 - calculate cumulative values from 2015-01-01
 if [ -z "$PG_PASS" ]
 then
   echo "$0: you need to set PG_PASS=..."
@@ -36,29 +37,41 @@ for row in $data
 do
   row=${row//:/ }
   ary=($row)
-  echo "Range ${ary[0]} ${ary[1]}"
-  GHA2DB_CSVOUT="${ary[0]}_${ary[1]}.csv" ./sh/run.sh "${2}" "${ary[0]}" "${ary[1]}" "${@:3:99}"
+  if [ -z "$CUMULATIVE" ]
+  then
+    dfrom="${ary[0]}"
+  else
+    dfrom="${CUMULATIVE}"
+  fi
+  echo "Range ${dfrom} ${ary[1]}"
+  GHA2DB_CSVOUT="${dfrom}_${ary[1]}.csv" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
 done
 hdr=''
 for row in $data
 do
   row=${row//:/ }
   ary=($row)
+  if [ -z "$CUMULATIVE" ]
+  then
+    dfrom="${ary[0]}"
+  else
+    dfrom="${CUMULATIVE}"
+  fi
   if [ -z "$hdr" ]
   then
-    hdr=`head -n 1 "${ary[0]}_${ary[1]}.csv"`
+    hdr=`head -n 1 "${dfrom}_${ary[1]}.csv"`
     if [ -z "$SKIPDT" ]
     then
       hdr="from,to,${hdr}"
     fi
     echo $hdr > out.csv
   fi
-  rows=`tail -n +2 "${ary[0]}_${ary[1]}.csv"`
+  rows=`tail -n +2 "${dfrom}_${ary[1]}.csv"`
   for row in $rows
   do
     if [ -z "$SKIPDT" ]
     then
-      echo "${ary[0]},${ary[1]},$row" >> out.csv
+      echo "${dfrom},${ary[1]},$row" >> out.csv
     else
       echo "$row" >> out.csv
     fi
