@@ -1,5 +1,5 @@
 select
-  count(distinct id) as prs
+  count(distinct id) as issues
 from
   gha_issues
 where
