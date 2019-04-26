@@ -15,5 +15,6 @@ from (
   order by
     commits desc,
     committer asc
+  limit {{lim}}
 ) sub
 ;

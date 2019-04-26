@@ -24,5 +24,6 @@ from (
   order by
     contributions desc,
     company asc
+  limit {{lim}}
 ) sub
 ;

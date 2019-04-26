@@ -10,3 +10,4 @@ Various reports generated from DevStats databases
 - Running report for multiple date ranges: `[SKIPDT=1] PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list)`.
 - Running cumulative report: `CUMULATIVE=2014-01-01 PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list)`.
 - Additional parameters example: `SKIPDT=1 PG_PASS=... ./sh/rep.sh years company_contributions {{company}} 'Red Hat'`.
+- Example with limits: `SKIPDT=1 PG_PASS=... CUMULATIVE=2012-01-01 ./sh/rep.sh quarters contributing_companies_list {{lim}} 8`.
