@@ -6,8 +6,9 @@ Various reports generated from DevStats databases
 
 - For available reports, do: `ls sql/`. Use any file without `.sql` extension, for example: developers, issues, prs, commits etc.
 - Running single report: `PG_PASS=...  ./sh/run.sh (developers|issues|prs|..|contributing_companies_list) 2016-01-01 2017-01-01`.
-- Some reports require passing additional parameters, example: `PG_PASS=...  ./sh/run.sh company_contributions 2016-01-01 2017-01-01 {{company}} Google`.
+- Some reports require passing additional parameters, example: `PG_PASS=...  ./sh/run.sh company_contributions 2016-01-01 2017-01-01 {{type}} known {{company}} Google`.
 - Running report for multiple date ranges: `[SKIPDT=1] PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list)`.
 - Running cumulative report: `CUMULATIVE=2014-01-01 PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list)`.
-- Additional parameters example: `SKIPDT=1 PG_PASS=... ./sh/rep.sh years company_contributions {{company}} 'Red Hat'`.
+- Additional parameters example: `SKIPDT=1 PG_PASS=... ./sh/rep.sh years company_contributions {{type}} all {{company}} 'Red Hat'`.
 - Example with limits: `SKIPDT=1 PG_PASS=... CUMULATIVE=2012-01-01 ./sh/rep.sh quarters contributing_companies_list {{lim}} 8`.
+- Company commits percent: `SKIPDT=1 PG_PASS=... ./sh/rep.sh 2015-07-21 company_commits {{actor}} author {{company}} 'Red Hat'`.
