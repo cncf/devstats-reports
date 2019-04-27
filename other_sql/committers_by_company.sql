@@ -1,0 +1,1 @@
+select distinct af.company_name, c.dup_committer_login from gha_commits c left join gha_actors_affiliations af on c.committer_id = af.actor_id and af.dt_from <= c.dup_created_at and af.dt_to > c.dup_created_at where c.dup_created_at < '2016-03-10' order by af.company_name, c.dup_committer_login;
