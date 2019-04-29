@@ -1,10 +1,12 @@
 select
   sub.company_commiters as commiters,
-  (sub.company_commiters * 100.0) / sub.{{type}}_commiters as percent_commiters
+  (sub.company_commiters * 100.0) / sub.{{type}}_commiters as percent_commiters,
+  (sub.known_commiters * 100.0) / sub.all_commiters as data_quality
 from (
   select count(distinct c.dup_{{actor}}_login) filter (where af.company_name = '{{company}}') as company_commiters,
-    count(distinct c.dup_{{actor}}_login) filter (where af.company_name is not null) as known_commiters,
-    count(distinct c.dup_{{actor}}_login) as all_commiters
+    -- count(distinct c.dup_{{actor}}_login) filter (where af.company_name is not null and c.dup_{{actor}}_login != '') as known_commiters,
+    count(c.dup_{{actor}}_login) filter (where c.dup_committer_login != '') as known_commiters,
+    count(c.dup_{{actor}}_login) as all_commiters
   from (
     select
       sha,
