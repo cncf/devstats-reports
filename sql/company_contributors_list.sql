@@ -1,11 +1,11 @@
 select
-  sub.company_contributions as contributions,
-  (sub.company_contributions * 100.0) / sub.{{type}}_contributions as percent_contributions,
-  (sub.known_contributions * 100.0) / sub.all_contributions as data_quality
+  sub.company,
+  sub.contributor,
+  sub.contributions
 from (
-  select count(e.id) filter (where af.company_name = '{{company}}') as company_contributions,
-    count(e.id) filter (where af.company_name is not null) as known_contributions,
-    count(e.id) as all_contributions
+  select af.company_name as company,
+    e.dup_actor_login as contributor,
+    count(e.id) as contributions
   from
     gha_events e
   left join
@@ -22,5 +22,12 @@ from (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
+  group by
+    af.company_name,
+    e.dup_actor_login
 ) sub
+order by
+  sub.{{order}},
+  sub.contributions desc,
+  sub.contributor asc
 ;

@@ -1,10 +1,13 @@
 select
   sub.company_commits as commits,
-  (sub.company_commits * 100.0) / sub.{{type}}_commits as percent_commits
+  (sub.company_commits * 100.0) / sub.{{type}}_distinct_commits as percent_commits,
+  (sub.known_commits * 100.0) / sub.all_commits as data_quality
 from (
   select count(distinct c.sha) filter (where af.company_name = '{{company}}') as company_commits,
-    count(distinct c.sha) filter (where af.company_name is not null) as known_commits,
-    count(distinct c.sha) as all_commits
+    count(distinct c.sha) filter (where af.company_name is not null and c.dup_{{actor}}_login != '') as known_distinct_commits,
+    count(distinct c.sha) as all_distinct_commits,
+    count(c.sha) filter (where af.company_name is not null and c.dup_{{actor}}_login != '') as known_commits,
+    count(c.sha) as all_commits
   from (
     select
       sha,
