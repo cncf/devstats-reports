@@ -19,7 +19,8 @@ from (
     from
       gha_commits
     where
-      dup_created_at < '2016-03-10'
+      dup_created_at >= '{{dtfrom}}'
+      and dup_created_at < '{{dtto}}'
   ) c
   left join
     gha_actors_affiliations af
@@ -28,13 +29,13 @@ from (
     and af.dt_from <= c.dup_created_at
     and af.dt_to > c.dup_created_at
   where
-    lower(c.dup_{{actor}}_login) {{exclude_bots}}
+    (lower(c.dup_{{actor}}_login) {{exclude_bots}})
   group by
     af.company_name,
     c.dup_{{actor}}_login
   ) sub
 order by
+  sub.{{order}},
   sub.commits desc,
-  sub.company asc,
   sub.commit_{{actor}} asc
 ;
