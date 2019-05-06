@@ -1,20 +1,20 @@
 select
-  string_agg(sub.committer, ',') as developers
+  string_agg(sub.{{actor}}, ',') as developers
 from (
-  select distinct dup_committer_login as committer,
+  select distinct dup_{{actor}}_login as {{actor}},
     count(distinct sha) as commits
   from
     gha_commits
   where
     dup_created_at >= '{{dtfrom}}'
     and dup_created_at < '{{dtto}}'
-    and dup_committer_login != ''
-    and (lower(dup_committer_login) {{exclude_bots}})
+    and dup_{{actor}}_login != ''
+    and (lower(dup_{{actor}}_login) {{exclude_bots}})
   group by
-    dup_committer_login
+    dup_{{actor}}_login
   order by
     commits desc,
-    committer asc
+    {{actor}} asc
   limit {{lim}}
 ) sub
 ;
