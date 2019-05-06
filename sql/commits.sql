@@ -5,4 +5,5 @@ from
 where
   dup_created_at >= '{{dtfrom}}'
   and dup_created_at < '{{dtto}}'
+  and (lower(dup_{{actor}}_login) {{exclude_bots}})
 ;
