@@ -1,6 +1,7 @@
 #!/bin/bash
 # SKIPDT=1 - skip from,to ranges in the final out.csv output file.
 # CUMULATIVE=2015-01-01 - calculate cumulative values from 2015-01-01
+# CSV=file.csv - overwrite default CSV name
 if [ -z "$PG_PASS" ]
 then
   echo "$0: you need to set PG_PASS=..."
@@ -9,7 +10,7 @@ fi
 
 if [ -z "$1" ]
 then
-  echo "$0: you need to provide 1st argument - report type: join, quarters, years"
+  echo "$0: you need to provide 1st argument - report type: join, quarters, years, YYYY-MM-DD, all"
   exit 2
 fi
 
@@ -32,6 +33,10 @@ if [ "$1" = "join" ]
 then
   data='2010-01-01:2016-03-10 2016-03-10:2080-01-01'
 fi
+if [ "$1" = "all" ]
+then
+  data="2010-01-01:2080-01-01"
+fi
 
 if [ "$data" = "" ]
 then
@@ -49,7 +54,12 @@ do
     dfrom="${CUMULATIVE}"
   fi
   echo "Range ${dfrom} ${ary[1]}"
-  GHA2DB_CSVOUT="${dfrom}_${ary[1]}.csv" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
+  if [ -z "$CSV" ]
+  then
+    GHA2DB_CSVOUT="${dfrom}_${ary[1]}.csv" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
+  else
+    GHA2DB_CSVOUT="${CSV}" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
+  fi
 done
 hdr=''
 for row in $data

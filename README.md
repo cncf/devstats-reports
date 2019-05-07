@@ -14,3 +14,5 @@ Various reports generated from DevStats databases
 - Company commits percent: `SKIPDT=1 PG_PASS=... ./sh/rep.sh 2015-07-21 company_commits {{type}} known {{actor}} author {{company}} 'Red Hat'`.
 - Company committers list: `SKIPDT=1 PG_PASS=... ./sh/rep.sh 2016-03-10 company_committers_list {{order}} 'commits desc' {{actor}} author`.
 - Company committers percent: `SKIPDT=1 PG_PASS=... ./sh/rep.sh 2016-03-10 company_committers_percent {{type}} all {{actor}} author {{company}} 'Google'`.
+- Stats for all CNCF projects: `PG_PASS=... ./sh/all.sh ./sh/rep.sh all contributors_count`.
+- Example contributors stats: `PG_PASS=... ./sh/all.sh ./sh/rep.sh all company_contributors {{type}} known {{company}} Apple`.
