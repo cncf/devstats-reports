@@ -17,3 +17,4 @@ Various reports generated from DevStats databases
 - Stats for all CNCF projects: `PG_PASS=... ./sh/all.sh ./sh/rep.sh all contributors_count`.
 - Example contributors stats: `PG_PASS=... ./sh/all.sh ./sh/rep.sh all company_contributors {{type}} known {{company}} Apple`.
 - Company committers per CNCF projects: `SKIPDT=1 PG_PASS=... ./sh/all.sh ./sh/rep.sh all company_committers_percent {{type}} known {{company}} Apple {{actor}} author`.
+- Company committers emails for all CNCF projects: `SKIPDT=1 PG_DB=allprj CSV=emails.csv PG_PASS=... ./sh/rep.sh all company_committers_emails {{type}} known {{company}} Apple {{actor}} author`.
