@@ -19,10 +19,10 @@ then
   echo "$0: you need to provide 3rd date-to in YYYY-MM-DD format"
   exit 4
 fi
-bots="`cat ~/dev/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql`"
+bots="`cat ~/dev/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql 2>/dev/null`"
 if [ -z "$bots" ]
 then
-  bots="`cat /data/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql`"
+  bots="`cat /data/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql 2>/dev/null`"
 fi
 if [ -z "$bots" ]
 then
