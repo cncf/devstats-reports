@@ -24,4 +24,8 @@ if [ -z "$bots" ]
 then
   bots="`cat /data/go/src/github.com/cncf/devstats/util_sql/exclude_bots.sql`"
 fi
+if [ -z "$bots" ]
+then
+  bots="`cat /etc/gha2db/util_sql/exclude_bots.sql`"
+fi
 GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_SKIPLOG=1 runq "sql/${1}.sql" {{dtfrom}} "${2}" {{dtto}} "${3}" {{exclude_bots}} "$bots" "${@:4:99}"
