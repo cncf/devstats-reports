@@ -4,6 +4,8 @@ Various reports generated from DevStats databases
 
 # Running reports
 
+On bare metal:
+
 - For available reports, do: `ls sql/`. Use any file without `.sql` extension, for example: developers, issues, prs, commits etc.
 - Running single report: `PG_PASS=...  ./sh/run.sh (developers|issues|prs|..|contributing_companies_list) 2016-01-01 2017-01-01`.
 - Some reports require passing additional parameters, example: `PG_PASS=...  ./sh/run.sh company_contributions 2016-01-01 2017-01-01 {{type}} known {{company}} Google`.
@@ -20,3 +22,8 @@ Various reports generated from DevStats databases
 - Company committers emails for all CNCF projects: `SKIPDT=1 PG_DB=allprj CSV=emails.csv PG_PASS=... ./sh/rep.sh all company_committers_emails {{type}} known {{company}} Apple {{actor}} author`.
 - List company's individual commits: `SKIPDT=1 PG_DB=allprj PG_PASS=... CSV=commits_links.csv ./sh/rep.sh all company_commits_links {{type}} known {{company}} Apple {{actor}} author`.
 - After report is processed `out.csv` file is generated - it can be used for creating charts and other data analysis.
+
+On Kubernetes:
+
+- Go to `cncf/devstats-helm` repo and follw instructions from `test/README.md` file, especially `Create reports pod` section.
+- Once you shell into the reports pod, you can act just like on the bare metal server. Putting any CSV files generated while reporting in `/data` directory will make them available at: `https://teststats.cncf.io/backups/`.
