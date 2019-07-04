@@ -22,6 +22,8 @@ On bare metal:
 - Company committers emails for all CNCF projects: `SKIPDT=1 PG_DB=allprj CSV=emails.csv PG_PASS=... ./sh/rep.sh all company_committers_emails {{type}} known {{company}} Apple {{actor}} author`.
 - List company's individual commits: `SKIPDT=1 PG_DB=allprj PG_PASS=... CSV=commits_links.csv ./sh/rep.sh all company_commits_links {{type}} known {{company}} Apple {{actor}} author`.
 - Some country stats: `PG_PASS=... ./sh/rep.sh years country_stats {{country}} 'United States' {{cumulative}} 'cum' {{period}} m {{repogroup}} all {{metric}} contributions`.
+- Yearly contributors with know country: `PG_PASS=... SKIPDT=1 CUMULATIVE=2012-01-01 ./sh/rep.sh years contributors_count_with_country`.
+- Yearly contributions from contributors with known country: `PG_PASS=... SKIPDT=1 CUMULATIVE=2012-01-01 ./sh/rep.sh years contributions_with_country`.
 - After report is processed `out.csv` file is generated - it can be used for creating charts and other data analysis.
 
 On Kubernetes:
