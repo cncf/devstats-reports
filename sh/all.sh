@@ -8,7 +8,7 @@ export LIST_FN_PREFIX="../devstats/devel/all_"
 . all_dbs.sh || exit 2
 for db in $all
 do
-  CSV="${db}.csv" PG_DB="$db" "${@}"
+  CSV="${db}.csv" PG_DB="$db" "${@}" || exit 3
   if [ -z "$hdr" ]
   then
     echo -n "project," > all.csv

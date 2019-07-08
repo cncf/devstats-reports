@@ -17,7 +17,7 @@ fi
 if [ -z "$2" ]
 then
   echo "$0: you need to provide 2nd argument - report name, for example developers_count"
-  exit 2
+  exit 3
 fi
 
 data=''
@@ -60,9 +60,9 @@ do
   echo "Range ${dfrom} ${ary[1]}"
   if [ -z "$CSV" ]
   then
-    GHA2DB_CSVOUT="${dfrom}_${ary[1]}.csv" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
+    GHA2DB_CSVOUT="${dfrom}_${ary[1]}.csv" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}" || exit 4
   else
-    GHA2DB_CSVOUT="${CSV}" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}"
+    GHA2DB_CSVOUT="${CSV}" ./sh/run.sh "${2}" "${dfrom}" "${ary[1]}" "${@:3:99}" || exit 5
   fi
 done
 hdr=''
