@@ -25,6 +25,7 @@ On bare metal:
 - Yearly contributors with know country: `PG_PASS=... SKIPDT=1 CUMULATIVE=2012-01-01 ./sh/rep.sh years contributors_count_with_country`.
 - Yearly contributions from contributors with known country: `PG_PASS=... SKIPDT=1 CUMULATIVE=2012-01-01 ./sh/rep.sh years contributions_with_country`.
 - After report is processed `out.csv` file is generated - it can be used for creating charts and other data analysis.
+- Velocity metrics: `PG_PASS=... ./sh/rep.sh quarters velocity {{actor}} author`.
 
 On Kubernetes:
 
