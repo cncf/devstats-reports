@@ -86,3 +86,7 @@ Velocity:
 
 - `` PG_PASS=... CUMULATIVE=2010-01-01 PG_DB=prometheus ./sh/rep.sh months velocity {{actor}} author ``.
 - `` PG_PASS=... PG_DB=prometheus ./sh/rep.sh prometheus_join velocity {{actor}} author ``.
+
+Documentation:
+
+- `` PG_PASS=... CUMULATIVE=2010-01-01 SKIPDT='' PG_DB=prometheus ./sh/rep.sh months documentation {{actor}} author ``.
