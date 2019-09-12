@@ -75,3 +75,4 @@ PRs:
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months prs ```.
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters prs ```.
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh years prs ```.
+- `` SKIPDT='' PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join prs ``.
