@@ -76,3 +76,8 @@ PRs:
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters prs ```.
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh years prs ```.
 - `` SKIPDT='' PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join prs ``.
+
+Commits:
+
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months commits {{actor}} author ``.
+- `` SKIPDT='' PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join commits {{actor}} author ``.
