@@ -53,6 +53,11 @@ then
   data="2010-01-01:$1 $1:2080-01-01"
 fi
 
+if [ -z "$CSV" ]
+then
+  rm -f "20*.csv"
+fi
+
 for row in $data
 do
   row=${row//:/ }
@@ -82,7 +87,7 @@ do
   else
     dfrom="${CUMULATIVE}"
   fi
-  echo "Merge ${dfrom}"
+  echo "Merge ${dfrom} - ${ary[1]}"
   if [ -z "$hdr" ]
   then
     hdr=`head -n 1 "${dfrom}_${ary[1]}.csv"`
