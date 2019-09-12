@@ -1,10 +1,8 @@
 select
-  c.name as country,
-  count(e.id) as country_contributions
+  count(e.id) as contributions
 from
   gha_events e,
-  gha_actors a,
-  gha_countries c
+  gha_actors a
 where
   e.actor_id = a.id
   and e.dup_actor_login = a.login
@@ -17,10 +15,4 @@ where
   )
   and a.country_id is not null
   and a.country_id != ''
-  and a.country_id = c.code
-group by
-  c.name
-order by
-  country_contributions desc
 ;
-

@@ -1,6 +1,6 @@
 select
   c.name as country,
-  count(e.id) as country_contributions
+  count(distinct e.actor_id) as country_contributors
 from
   gha_events e,
   gha_actors a,
@@ -21,6 +21,6 @@ where
 group by
   c.name
 order by
-  country_contributions desc
+  country_contributors desc
 ;
 

@@ -32,3 +32,31 @@ On Kubernetes:
 
 - Go to `cncf/devstats-helm` repo and follw instructions from `test/README.md` file, especially `Create reports pod` section.
 - Once you shell into the reports pod, you can act just like on the bare metal server. Putting any CSV files generated while reporting in `/data` directory will make them available at: `https://teststats.cncf.io/backups/`.
+
+
+For report:
+
+Company contributions:
+
+- `` PG_DB=prometheus PG_PASS=...  ./sh/run.sh contributing_companies_list 2014-01-01 2020-01-01 {{lim}} 8 ``.
+- `` PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters company_contributions {{type}} known {{company}} 'Robust Perception' ``.
+- `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters company_contributions {{type}} known {{company}} 'Red Hat' ``.
+
+Company percent contributions:
+
+- `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters company_contributions {{type}} known {{company}} 'Robust Perception' ``.
+
+Contributing companies:
+
+- `` SKIPDT=1 CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters contributing_companies_count; cat out.csv ``.
+- `` PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributing_companies_count ``.
+
+Contributors:
+
+- `` SKIPDT=1 CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters contributors_count; cat out.csv ``.
+- `` PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributors_count ``.
+
+Countries contributors:
+
+- `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_stats {{cumulative}} cum {{period}} m {{repogroup}} all {{metric}} contributors {{country}} Poland ``.
+- `` CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributors_with_country ``.
