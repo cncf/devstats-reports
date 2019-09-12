@@ -18,9 +18,9 @@ where
   and a.country_id != ''
   and a.country_id = c.code
   and c.name = '{{country}}'
-union select 0 as country_contributors
+union select 0 as country_contributions
 order by
-  country_contributors desc
+  country_contributions desc
 limit 
   1
 ;

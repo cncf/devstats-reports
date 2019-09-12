@@ -34,7 +34,7 @@ On Kubernetes:
 - Once you shell into the reports pod, you can act just like on the bare metal server. Putting any CSV files generated while reporting in `/data` directory will make them available at: `https://teststats.cncf.io/backups/`.
 
 
-For report:
+# Data for Prometheus report
 
 Company contributions:
 
@@ -61,3 +61,12 @@ Countries contributors:
 - `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_stats {{cumulative}} cum {{period}} m {{repogroup}} all {{metric}} contributors {{country}} Poland ``.
 - `` CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributors_with_country ``.
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_contributors {{country}} 'United States' ``.
+- `` CUMULATIVE=2012-01-01 PG_DB=prometheus SKIPDT=1 PG_PASS=... ./sh/rep.sh months contributors_count_with_country ``.
+
+Countries contributions:
+
+- `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_stats {{cumulative}} cum {{period}} m {{repogroup}} all {{metric}} contributions {{country}} Poland ``.
+- `` CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributions_with_country ``.
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_contributions {{country}} 'United States' ``.
+- `` CUMULATIVE=2012-01-01 PG_DB=prometheus SKIPDT=1 PG_PASS=... ./sh/rep.sh months contributions_by_country ``.
+
