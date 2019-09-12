@@ -81,3 +81,8 @@ Commits:
 
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months commits {{actor}} author ``.
 - `` SKIPDT='' PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join commits {{actor}} author ``.
+
+Velocity:
+
+- `` PG_PASS=... CUMULATIVE=2010-01-01 PG_DB=prometheus ./sh/rep.sh months velocity {{actor}} author ``.
+- `` PG_PASS=... PG_DB=prometheus ./sh/rep.sh prometheus_join velocity {{actor}} author ``.
