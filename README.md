@@ -70,3 +70,8 @@ Countries contributions:
 - `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_contributions {{country}} 'United States' ``.
 - `` CUMULATIVE=2012-01-01 PG_DB=prometheus SKIPDT=1 PG_PASS=... ./sh/rep.sh months contributions_by_country ``.
 
+PRs:
+
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months prs ```.
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters prs ```.
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh years prs ```.
