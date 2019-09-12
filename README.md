@@ -60,3 +60,4 @@ Countries contributors:
 
 - `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_stats {{cumulative}} cum {{period}} m {{repogroup}} all {{metric}} contributors {{country}} Poland ``.
 - `` CUMULATIVE=2012-01-01 PG_DB=prometheus PG_PASS=... ./sh/rep.sh prometheus_join contributors_with_country ``.
+- `` CUMULATIVE=2012-01-01 SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh months country_contributors {{country}} 'United States' ``.
