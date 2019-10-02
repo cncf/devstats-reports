@@ -6,7 +6,8 @@ with commits as (
   where
     dup_created_at >= '{{dtfrom}}'
     and dup_created_at < '{{dtto}}'
-    and (lower(dup_{{actor}}_login) {{exclude_bots}})
+    and (lower({{actor}}) {{exclude_bots}})
+    and (lower({{actor2}}) {{exclude_bots}})
 ), prs as (
   select
     count(distinct id) as prs
@@ -26,14 +27,14 @@ with commits as (
     and created_at < '{{dtto}}'
 ), authors as (
   select
-    count(distinct dup_{{actor}}_login) as authors
+    count(distinct {{actor}}) as authors
   from
     gha_commits
   where
     dup_created_at >= '{{dtfrom}}'
     and dup_created_at < '{{dtto}}'
-    and dup_{{actor}}_login != ''
-    and (lower(dup_{{actor}}_login) {{exclude_bots}})
+    and (lower({{actor}}) {{exclude_bots}})
+    and (lower({{actor2}}) {{exclude_bots}})
 )
 select
   c.commits,
