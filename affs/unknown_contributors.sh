@@ -9,4 +9,4 @@ then
   echo "$0: you need to set PG_DB=..., for example PG_DB=cii"
   exit 2
 fi
-GHA2DB_LOCAL=1 GHA2DB_CSVOUT=data/unknown_contributors.csv runq sql/unknown_contributors.sql {{exclude_bots}} "`cat /etc/gha2db/util_sql/exclude_bots.sql`"
+GHA2DB_LOCAL=1 GHA2DB_CSVOUT="data/${PG_DB}_unknown_contributors.csv" runq sql/unknown_contributors.sql {{exclude_bots}} "`cat /etc/gha2db/util_sql/exclude_bots.sql`"
