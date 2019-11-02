@@ -27,6 +27,7 @@ On bare metal:
 - After report is processed `out.csv` file is generated - it can be used for creating charts and other data analysis.
 - Velocity metrics: `PG_PASS=... ./sh/rep.sh quarters velocity {{actor}} author`.
 - Documentation commits, committers and companies: `PG_PASS=... CUMULATIVE=2014-01-01 ./sh/rep.sh quarters documentation {{actor}} author`.
+- Committers stats: `PG_DB=cii PG_PASS=... ./affs/committers.sh`.
 
 On Kubernetes:
 
