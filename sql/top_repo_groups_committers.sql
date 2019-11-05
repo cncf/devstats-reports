@@ -10,6 +10,7 @@ with commits as (
   where
     c.dup_repo_id = r.id
     and c.dup_repo_name = r.name
+    and r.repo_group is not null
     and c.committer_id is not null
     and (lower(c.dup_committer_login) {{exclude_bots}})
   union select c.author_id as actor_id,
@@ -23,6 +24,7 @@ with commits as (
   where
     c.dup_repo_id = r.id
     and c.dup_repo_name = r.name
+    and r.repo_group is not null
     and c.author_id is not null
     and (lower(c.dup_author_login) {{exclude_bots}})
   union select c.dup_actor_id as actor_id,
@@ -36,6 +38,7 @@ with commits as (
   where
     c.dup_repo_id = r.id
     and c.dup_repo_name = r.name
+    and r.repo_group is not null
     and c.dup_actor_id is not null
     and (lower(c.dup_actor_login) {{exclude_bots}})
 ), committers as (
