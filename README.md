@@ -31,7 +31,7 @@ On bare metal:
 
 On Kubernetes:
 
-- Go to `cncf/devstats-helm` repo and follw instructions from `test/README.md` file, especially `Create reports pod` section.
+- Go to `cncf/devstats-helm` repo and follow instructions from `test/README.md` file, especially `Create reports pod` section.
 - Once you shell into the reports pod, you can act just like on the bare metal server. Putting any CSV files generated while reporting in `/data` directory will make them available at: `https://teststats.cncf.io/backups/`.
 
 
