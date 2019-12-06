@@ -42,6 +42,12 @@ Details about running reports pod:
 - Finally delete reporting pod: `helm delete devstats-test-reports` (but you can leave it running, it is just sleeping forever waiting for shell connection).
 
 
+# Contributors
+
+
+- Shell into the reports pod and execute `./util_sh/update_contributors.sh`.
+
+
 # Data for Prometheus report
 
 Company contributions:
