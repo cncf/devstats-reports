@@ -45,7 +45,7 @@ Details about running reports pod:
 # Contributors
 
 
-- Shell into the reports pod and execute `./util_sh/update_contributors.sh`.
+- Shell into the reports pod and execute `./contributors/update_contributors.sh`.
 
 
 # Data for Prometheus report
