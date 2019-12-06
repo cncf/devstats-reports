@@ -44,8 +44,8 @@ Details about running reports pod:
 
 # Contributors
 
-
 - Shell into the reports pod and execute `./contributors/update_contributors.sh`.
+- Follow uploading to google sheets part of [this](https://github.com/cncf/devstats/blob/master/CONTRIBUTORS.md#conntributors-repors) documentation.
 
 
 # Data for Prometheus report
