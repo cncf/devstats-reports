@@ -35,5 +35,5 @@ do
   ./velocity/get_git_commits_count.sh "${db}" "${from}" "${to}"
   commits=`cat commits.txt`
   echo "${name} commits: ${commits}"
-  echo -n "${name},commits,${commits}" >> "${fn}"
+  echo "${name},commits,${commits}" >> "${fn}"
 done
