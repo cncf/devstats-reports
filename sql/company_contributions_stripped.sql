@@ -1,7 +1,7 @@
 select
-  sub.company_contributions as contributions,
-  (sub.company_contributions * 100.0) / case sub.{{type}}_contributions when 0 then 1 else sub.{{type}}_contributions end as percent_contributions,
-  (sub.known_contributions * 100.0) / case sub.all_contributions when 0 then 1 else sub.all_contributions end as data_quality
+  sub.company_contributions as contributions
+  -- (sub.company_contributions * 100.0) / case sub.{{type}}_contributions when 0 then 1 else sub.{{type}}_contributions end as percent_contributions,
+  -- (sub.known_contributions * 100.0) / case sub.all_contributions when 0 then 1 else sub.all_contributions end as data_quality
 from (
   select count(e.id) filter (where af.company_name = '{{company}}') as company_contributions,
     count(e.id) filter (where af.company_name is not null) as known_contributions,
