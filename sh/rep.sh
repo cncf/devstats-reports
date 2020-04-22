@@ -20,6 +20,8 @@ then
   exit 3
 fi
 
+rm -f 201*.csv
+
 data=''
 if [ "$1" = "quarters" ]
 then
@@ -86,6 +88,11 @@ do
   else
     dfrom="${CUMULATIVE}"
   fi
+  dto=${ary[1]}
+  if ( [ "$dfrom" \> "$dto" ] || [ "$dfrom" = "$dto" ] )
+  then
+    continue
+  fi
   echo "Range ${dfrom} ${ary[1]}"
   if [ -z "$CSV" ]
   then
@@ -104,6 +111,11 @@ do
     dfrom="${ary[0]}"
   else
     dfrom="${CUMULATIVE}"
+  fi
+  dto=${ary[1]}
+  if ( [ "$dfrom" \> "$dto" ] || [ "$dfrom" = "$dto" ] )
+  then
+    continue
   fi
   echo "Merge ${dfrom} - ${ary[1]}"
   if [ -z "$hdr" ]
