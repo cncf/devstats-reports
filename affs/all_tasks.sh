@@ -10,7 +10,13 @@ then
 else
   all="${ONLY}"
 fi
-for script in committers unknown_committers known_committers contributors unknown_contributors known_contributors issuers unknown_issuers known_issuers
+if [ -z "$TASKS" ]
+then
+  tasks='committers unknown_committers known_committers contributors unknown_contributors known_contributors issuers unknown_issuers known_issuers'
+else
+  tasks="${TASKS}"
+fi
+for script in $tasks
 do
   for db in $all
   do
