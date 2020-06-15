@@ -40,7 +40,7 @@ with events as (
     actor
   order by
     events desc
-), all_events as (
+), all_issuers as (
   select sum(events) as cnt
   from
     issuers
@@ -54,8 +54,8 @@ select
   round((sum(c.events) over cumulative_events * 100.0) / a.cnt, 5) as cumulative_percent,
   a.cnt as all_events
 from
-  known_events c,
-  all_evels a
+  known_issuers c,
+  all_issuers a
 window
   cumulative_events as (
     order by c.events desc, c.actor asc

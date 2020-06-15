@@ -25,7 +25,7 @@ with events as (
     )
     and (lower(e.dup_actor_login) {{exclude_bots}})
     and aa.actor_id is null
-), events as (
+), issuers as (
   select actor,
     count(distinct event_id) as events
   from
@@ -34,7 +34,7 @@ with events as (
     actor
   order by
     events desc
-), unknown_events as (
+), unknown_issuers as (
   select actor,
     count(distinct event_id) as events
   from
@@ -43,10 +43,10 @@ with events as (
     actor
   order by
     events desc
-), all_events as (
+), all_issuers as (
   select sum(events) as cnt
   from
-    events
+    issuers
 )
 select
   row_number() over cumulative_events as rank_number,
@@ -57,8 +57,8 @@ select
   round((sum(c.events) over cumulative_events * 100.0) / a.cnt, 5) as cumulative_percent,
   a.cnt as all_events
 from
-  unknown_events c,
-  all_events a
+  unknown_issuers c,
+  all_issuers a
 window
   cumulative_events as (
     order by c.events desc, c.actor asc
