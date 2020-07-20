@@ -104,3 +104,8 @@ Velocity:
 Documentation:
 
 - `` PG_PASS=... CUMULATIVE=2010-01-01 SKIPDT='' PG_DB=prometheus ./sh/rep.sh months documentation {{actor}} author ``.
+
+
+# Company contributors
+
+- `` clear; PG_DB=allprj ./affs/company_contributors.sh Apple ``.
