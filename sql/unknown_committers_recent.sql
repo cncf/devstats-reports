@@ -7,7 +7,6 @@ with commits as (
   where
     committer_id is not null
     and (lower(dup_committer_login) {{exclude_bots}})
-    and dup_created_at >= now() - '{{ago}}'::interval
   union select author_id as actor_id,
     dup_author_login as actor,
     event_id
@@ -16,7 +15,6 @@ with commits as (
   where
     author_id is not null
     and (lower(dup_author_login) {{exclude_bots}})
-    and dup_created_at >= now() - '{{ago}}'::interval
   union select actor_id,
     dup_actor_login as actor,
     id as event_id
@@ -25,7 +23,6 @@ with commits as (
   where
     type in ('PushEvent')
     and (lower(dup_actor_login) {{exclude_bots}})
-    and created_at >= now() - '{{ago}}'::interval
 ), unknown_commits as (
   select distinct c.committer_id as actor_id,
     c.dup_committer_login as actor,
@@ -39,7 +36,6 @@ with commits as (
   where
     c.committer_id is not null
     and (lower(c.dup_committer_login) {{exclude_bots}})
-    and c.dup_created_at >= now() - '{{ago}}'::interval
     and aa.actor_id is null
   union select distinct c.author_id as actor_id,
     c.dup_author_login as actor,
@@ -53,7 +49,6 @@ with commits as (
   where
     c.author_id is not null
     and (lower(c.dup_author_login) {{exclude_bots}})
-    and c.dup_created_at >= now() - '{{ago}}'::interval
     and aa.actor_id is null
   union select distinct e.actor_id,
     e.dup_actor_login as actor,
@@ -67,7 +62,6 @@ with commits as (
   where
     e.type in ('PushEvent')
     and (lower(e.dup_actor_login) {{exclude_bots}})
-    and e.created_at >= now() - '{{ago}}'::interval
     and aa.actor_id is null
 ), committers as (
   select actor,
