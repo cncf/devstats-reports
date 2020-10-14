@@ -25,4 +25,4 @@ then
   exit 5
 fi
 .  ./sh/bots.sh
-GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_SKIPLOG=1 PG_DB="${1}" GHA2DB_CSVOUT="/data/${1}_contributors_with_${4}.csv" runq sql/contributors_with_n_dtrange.sql {{exclude_bots}} "$bots" {{from}} "${2}" {{to}} "${3}" {{n}} "${4}"
+GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_SKIPLOG=1 PG_DB="${1}" GHA2DB_CSVOUT="/data/${1}_contributors_with_${4}.csv" runq contributors/sql/contributors_with_n_dtrange.sql {{exclude_bots}} "$bots" {{from}} "${2}" {{to}} "${3}" {{n}} "${4}"
