@@ -1,5 +1,5 @@
 select
-  count(distinct af.company_name) as companies
+  count(distinct af.{{company_name}}) as companies
 from (
   select
     sha,
@@ -21,7 +21,7 @@ where
   c.{{actor}}_id = af.actor_id
   and af.dt_from <= c.dup_created_at
   and af.dt_to > c.dup_created_at
-  and af.company_name != 'Independent'
-  and af.company_name != ''
+  and af.{{company_name}} != 'Independent'
+  and af.{{company_name}} != ''
   and (lower(c.dup_{{actor}}_login) {{exclude_bots}})
 ;

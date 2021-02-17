@@ -1,5 +1,5 @@
 select
-  aa.company_name as company,
+  aa.{{company_name}} as company,
   r.repo_group as project,
   count(distinct e.id) as contributions,
   count(distinct e.actor_id) as contributors
@@ -18,9 +18,9 @@ where
   )
   and (lower(dup_actor_login) {{exclude_bots}})
 group by
-  aa.company_name,
+  aa.{{company_name}},
   r.repo_group
 order by
-  aa.company_name,
+  aa.{{company_name}},
   r.repo_group
 ;

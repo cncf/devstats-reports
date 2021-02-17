@@ -3,7 +3,7 @@ select
   sub.commit_{{actor}},
   sub.commits
 from (
-  select af.company_name as company,
+  select af.{{company_name}} as company,
     c.dup_{{actor}}_login as commit_{{actor}},
     count(distinct c.sha) as commits
   from (
@@ -31,7 +31,7 @@ from (
   where
     (lower(c.dup_{{actor}}_login) {{exclude_bots}})
   group by
-    af.company_name,
+    af.{{company_name}},
     c.dup_{{actor}}_login
   ) sub
 order by

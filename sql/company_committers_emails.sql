@@ -1,5 +1,5 @@
 select distinct 
-  af.company_name as company,
+  af.{{company_name}} as company,
   c.dup_{{actor}}_login as commit_{{actor}},
   ae.email as commit_{{actor}}_email,
   count(distinct sha) as commit_{{actor}}_commits
@@ -24,12 +24,12 @@ where
   c.{{actor}}_id = af.actor_id
   and af.dt_from <= c.dup_created_at
   and af.dt_to > c.dup_created_at
-  and af.company_name = '{{company}}'
+  and af.{{company_name}} = '{{company}}'
   and c.{{actor}}_id = ae.actor_id
   and lower(ae.email) not like '%users.noreply.github.com'
   and (lower(c.dup_{{actor}}_login) {{exclude_bots}})
 group by
-  af.company_name,
+  af.{{company_name}},
   c.dup_{{actor}}_login,
   ae.email
 order by

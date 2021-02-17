@@ -5,8 +5,8 @@ select
 from (
   select
     count(distinct e.dup_actor_login) as all_contributors,
-    count(distinct e.dup_actor_login) filter (where af.company_name = '{{company}}') as company_contributors,
-    count(distinct e.dup_actor_login) filter (where af.company_name is not null and e.dup_actor_login != '') as known_contributors
+    count(distinct e.dup_actor_login) filter (where af.{{company_name}} = '{{company}}') as company_contributors,
+    count(distinct e.dup_actor_login) filter (where af.{{company_name}} is not null and e.dup_actor_login != '') as known_contributors
   from
     gha_events e
   left join

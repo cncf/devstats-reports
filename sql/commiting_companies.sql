@@ -1,5 +1,5 @@
 select
-  af.company_name as company,
+  af.{{company_name}} as company,
   count(distinct c.sha) as commits
 from (
   select
@@ -22,11 +22,11 @@ where
   c.{{actor}}_id = af.actor_id
   and af.dt_from <= c.dup_created_at
   and af.dt_to > c.dup_created_at
-  and af.company_name != 'Independent'
-  and af.company_name != ''
+  and af.{{company_name}} != 'Independent'
+  and af.{{company_name}} != ''
   and (lower(c.dup_{{actor}}_login) {{exclude_bots}})
 group by
-  af.company_name
+  af.{{company_name}}
 order by
   commits desc,
   company asc

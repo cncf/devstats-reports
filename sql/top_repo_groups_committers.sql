@@ -44,7 +44,7 @@ with commits as (
 ), committers as (
   select c.actor,
     c.repo,
-    coalesce(aa.company_name, '(Unknown)') as company,
+    coalesce(aa.{{company_name}}, '(Unknown)') as company,
     count(distinct c.sha) as commits
   from
     commits c

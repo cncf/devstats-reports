@@ -3,7 +3,7 @@ select
   sub.contributor,
   sub.contributions
 from (
-  select af.company_name as company,
+  select af.{{company_name}} as company,
     e.dup_actor_login as contributor,
     count(e.id) as contributions
   from
@@ -23,7 +23,7 @@ from (
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
   group by
-    af.company_name,
+    af.{{company_name}},
     e.dup_actor_login
 ) sub
 order by

@@ -9,7 +9,7 @@ with contributions as (
     aa.actor_id = c.committer_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    -- and aa.company_name = '{{company}}'
+    -- and aa.{{company_name}} = '{{company}}'
     and c.committer_id is not null
     and (lower(c.dup_committer_login) {{exclude_bots}})
   union select c.author_id as actor_id,
@@ -22,7 +22,7 @@ with contributions as (
     aa.actor_id = c.author_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    -- and aa.company_name = '{{company}}'
+    -- and aa.{{company_name}} = '{{company}}'
     and c.author_id is not null
     and (lower(c.dup_author_login) {{exclude_bots}})
   union select e.actor_id,
@@ -35,7 +35,7 @@ with contributions as (
     aa.actor_id = e.actor_id
     and e.created_at >= aa.dt_from
     and e.created_at < aa.dt_to
-    -- and aa.company_name = '{{company}}'
+    -- and aa.{{company_name}} = '{{company}}'
     and e.type in (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
@@ -54,7 +54,7 @@ with contributions as (
     and c.committer_id = aa.actor_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    and aa.company_name = '{{company}}'
+    and aa.{{company_name}} = '{{company}}'
   union select distinct c.author_id as actor_id,
     c.dup_author_login as actor,
     c.event_id
@@ -67,7 +67,7 @@ with contributions as (
     and c.author_id = aa.actor_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    and aa.company_name = '{{company}}'
+    and aa.{{company_name}} = '{{company}}'
   union select distinct e.actor_id,
     e.dup_actor_login as actor,
     e.id as event_id
@@ -83,7 +83,7 @@ with contributions as (
     and e.actor_id = aa.actor_id
     and e.created_at >= aa.dt_from
     and e.created_at < aa.dt_to
-    and aa.company_name = '{{company}}'
+    and aa.{{company_name}} = '{{company}}'
 ), contributors as (
   select actor,
     count(distinct event_id) as contributions
