@@ -116,3 +116,7 @@ Documentation:
 Contributors having at least N=20 contributions in PROJ=opentelementry project during the last year:
 
 - `./contributors/contributors_with_n_dtrange.sh opentelemetry "now()-'1 year'::interval" 'now()' 20`.
+
+# GDPR requests
+
+- `PG_PASS=.. ./sh/gdpr.sh 'Identity 1' 'name 2' 'email 3' ...`.
