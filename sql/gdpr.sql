@@ -17,7 +17,7 @@ from
 where
   lower(name) {{cond}}
 union select
-  'gha_actors_emails: emails: ' || email as hit
+  'gha_actors_emails: email: ' || email as hit
 from
   gha_actors_emails
 where
