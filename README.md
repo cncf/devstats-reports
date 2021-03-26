@@ -119,4 +119,4 @@ Contributors having at least N=20 contributions in PROJ=opentelementry project d
 
 # GDPR requests
 
-- `PG_PASS=.. ./sh/gdpr.sh 'Identity 1' 'name 2' 'email 3' ...`.
+- `./sh/gdpr.sh 'Identity 1' 'name 2' 'email 3' ...`.
