@@ -119,4 +119,10 @@ Contributors having at least N=20 contributions in PROJ=opentelementry project d
 
 # GDPR requests
 
+- SSH into `node-0` DevStats node.
+- Create reporting pod: `helm install devstats-prod-reports ./devstats-helm --set skipSecrets=1,skipPVs=1,skipBackupsPV=1,skipVacuum=1,skipBackups=1,skipBootstrap=1,skipProvisions=1,skipCrons=1,skipAffiliations=1,skipGrafanas=1,skipServices=1,skipPostgres=1,skipIngress=1,skipStatic=1,skipAPI=1,skipNamespaces=1,reportsPod=1,namespace='devstats-prod'`.
+- Shell into reports pod: `../devstats-k8s-lf/util/pod_shell.sh devstats-reports` and then run some report: (see `cncf/devstats-reports:README.md`: example: `PG_DB=cii ./affs/unknown_committers.sh`). To shell from different namespace: `k exec -it -n devstats-prod devstats-reports -- /bin/bash`.
 - `./sh/gdpr.sh 'Identity 1' 'name 2' 'email 3' ...`.
+- You don't need to downcase names, remove spaces, @, ! etc.
+- Finally delete reporting pod: `helm delete devstats-prod-reports` (but you can leave it running, it is just sleeping forever waiting for shell connection).
+
