@@ -12,13 +12,19 @@ from (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
+    and e.created_at >= '{{dtfrom}}'
+    and e.created_at < '{{dtto}}'
   union select
     a.country_id
   from
     gha_actors a,
     gha_commits c
   where
-    c.author_id = a.id
-    or c.committer_id = a.id
+    (
+      c.author_id = a.id
+      or c.committer_id = a.id
+    )
+    and c.dup_created_at >= '{{dtfrom}}'
+    and c.dup_created_at < '{{dtto}}'
 ) sub
 ;
