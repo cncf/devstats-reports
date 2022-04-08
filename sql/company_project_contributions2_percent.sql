@@ -24,7 +24,7 @@ from (
     and af.{{company_name}} = '{{company}}'
     and (lower(e.dup_actor_login) {{exclude_bots}})
     and e.type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
 ) sub

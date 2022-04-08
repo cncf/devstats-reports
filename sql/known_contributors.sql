@@ -22,7 +22,7 @@ with contributions as (
     gha_events
   where
     type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
     and (lower(dup_actor_login) {{exclude_bots}})
@@ -55,7 +55,7 @@ with contributions as (
     gha_actors_affiliations aa
   where
     e.type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
     and (lower(e.dup_actor_login) {{exclude_bots}})

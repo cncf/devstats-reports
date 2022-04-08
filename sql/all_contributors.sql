@@ -22,7 +22,7 @@ with contributions as (
     gha_events
   where
     type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
     and (lower(dup_actor_login) {{exclude_bots}})

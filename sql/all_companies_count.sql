@@ -12,7 +12,7 @@ from (
     and af.dt_to > e.created_at
     and af.company_name not in ('Independent', 'Unknown', 'NotFound', '')
     and e.type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
   union select

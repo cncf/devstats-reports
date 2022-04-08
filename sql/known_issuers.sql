@@ -6,7 +6,7 @@ with events as (
     gha_events
   where
     type in (
-      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent'
+      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent', 'PullRequestReviewEvent'
     )
     and (lower(dup_actor_login) {{exclude_bots}})
 ), known_events as (
@@ -18,7 +18,7 @@ with events as (
     gha_actors_affiliations aa
   where
     e.type in (
-      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent'
+      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent', 'PullRequestReviewEvent'
     )
     and (lower(e.dup_actor_login) {{exclude_bots}})
     and e.actor_id = aa.actor_id

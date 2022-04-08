@@ -18,7 +18,7 @@ from (
     and e.dup_repo_name = r.name
     and (lower(e.dup_actor_login) {{exclude_bots}})
     and e.type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
   group by

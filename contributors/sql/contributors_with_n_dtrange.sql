@@ -7,7 +7,7 @@ with contributions as (
   where
     type in (
       'PullRequestReviewCommentEvent', 'PushEvent', 'PullRequestEvent',
-      'IssuesEvent', 'IssueCommentEvent', 'CommitCommentEvent'
+      'IssuesEvent', 'IssueCommentEvent', 'CommitCommentEvent', 'PullRequestReviewEvent'
     )
     and (lower(dup_actor_login) {{exclude_bots}})
     and created_at >= {{from}}

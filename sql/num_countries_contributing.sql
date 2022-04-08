@@ -9,7 +9,7 @@ from (
   where
     e.actor_id = a.id
     and e.type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
     and e.created_at >= '{{dtfrom}}'

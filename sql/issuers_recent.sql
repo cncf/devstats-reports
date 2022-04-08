@@ -6,7 +6,7 @@ with events as (
     gha_events
   where
     type in (
-      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent'
+      'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewCommentEvent', 'PullRequestReviewEvent'
     )
     and (lower(dup_actor_login) {{exclude_bots}})
     and created_at >= now() - '{{ago}}'::interval

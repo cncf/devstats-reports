@@ -13,7 +13,7 @@ where
   and e.created_at >= v1.time
   and e.created_at < v2.time
   and e.type in (
-    'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+    'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
     'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
   )
   and (lower(e.dup_actor_login) {{exclude_bots}})
@@ -39,7 +39,7 @@ from
 where
   e.created_at >= v.time
   and e.type in (
-    'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+    'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
     'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
   )
   and (lower(e.dup_actor_login) {{exclude_bots}})
