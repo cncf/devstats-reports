@@ -36,7 +36,7 @@ On bare metal:
 
 Details about running reports pod:
 
-- Create reports pod: `helm install devstats-test-reports ./devstats-helm --set skipSecrets=1,skipPVs=1,skipBackupsPV=1,skipVacuum=1,skipBackups=1,skipBootstrap=1,skipProvisions=1,skipCrons=1,skipAffiliations=1,skipGrafanas=1,skipServices=1,skipPostgres=1,skipIngress=1,skipStatic=1,skipNamespaces=1,reportsPod=1,projectsOverride='+cncf\,+opencontainers\,+istio\,+zephyr\,+linux\,+rkt\,+sam\,+azf\,+riff\,+fn\,+openwhisk\,+openfaas\,+cii\,+prestodb'`
+- Create reports pod: `helm install devstats-test-reports ./devstats-helm --set skipSecrets=1,skipPVs=1,skipBackupsPV=1,skipVacuum=1,skipBackups=1,skipBootstrap=1,skipProvisions=1,skipCrons=1,skipAffiliations=1,skipGrafanas=1,skipServices=1,skipPostgres=1,skipIngress=1,skipStatic=1,skipNamespaces=1,reportsPod=1,projectsOverride='+cncf\,+opencontainers\,+istio\,+zephyr\,+linux\,+rkt\,+sam\,+azf\,+riff\,+fn\,+openwhisk\,+openfaas\,+cii\,+prestodb\,+opentracing'`
 - Shell into reports pod: `../devstats-k8s-lf/util/pod_shell.sh devstats-reports` and then run some report: (see `cncf/devstats-reports:README.md`: example: `PG_DB=cii ./affs/unknown_committers.sh`). To shell from different namespace: `k exec -it -n devstats-test devstats-reports -- /bin/bash`.
 - If you move any generated CSV file into the `/data` directory (which is RWX PV mount) - that file will be available at: `https://teststats.cncf.io/backups/`.
 - Finally delete reporting pod: `helm delete devstats-test-reports` (but you can leave it running, it is just sleeping forever waiting for shell connection).
