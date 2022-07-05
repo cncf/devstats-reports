@@ -78,6 +78,7 @@ fi
 if [ "$1" = "cloudcustodian_join" ]
 then
   data='2014-01-01:2020-06-23 2020-06-23:2080-01-01'
+fi
 if [ "$1" = "opentelemetry_join" ]
 then
   data='2014-01-01:2019-05-07 2019-05-07:2080-01-01'
