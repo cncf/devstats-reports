@@ -1,6 +1,7 @@
 #!/bin/bash
 # SKIPDT=1 - skip from,to ranges in the final out.csv output file.
 # CUMULATIVE=2015-01-01 - calculate cumulative values from 2015-01-01
+# FROM=2015-01-01 - start calculating from 2015-01-01
 # CSV=file.csv - overwrite default CSV name
 if [ -z "$PG_PASS" ]
 then
@@ -113,6 +114,14 @@ do
     dfrom="${CUMULATIVE}"
   fi
   dto=${ary[1]}
+  if [ ! -z "${FROM}" ]
+  then
+    from="${FROM}"
+    if ( [ "$from" \> "$dto" ] || [ "$from" = "$dto" ] )
+    then
+      continue
+    fi
+  fi
   if ( [ "$dfrom" \> "$dto" ] || [ "$dfrom" = "$dto" ] )
   then
     continue
@@ -137,6 +146,14 @@ do
     dfrom="${CUMULATIVE}"
   fi
   dto=${ary[1]}
+  if [ ! -z "${FROM}" ]
+  then
+    from="${FROM}"
+    if ( [ "$from" \> "$dto" ] || [ "$from" = "$dto" ] )
+    then
+      continue
+    fi
+  fi
   if ( [ "$dfrom" \> "$dto" ] || [ "$dfrom" = "$dto" ] )
   then
     continue
