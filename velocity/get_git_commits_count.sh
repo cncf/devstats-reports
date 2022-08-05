@@ -1,5 +1,6 @@
 #!/bin/bash
 # REPOS=... - manually specify repos
+# INCLUDE_FORKS=1 - do not skip forks
 if [ -z "$PG_PASS" ]
 then
   echo "$0: you need to set PG_PASS=..."
@@ -9,14 +10,14 @@ if [ -z "$1" ]
 then
   echo "$0: you need to provide 1st argument proect database name: gha, prometheus, cncf, allprj etc."
   exit 2
-fi 
+fi
 if [ -z "$2" ]
 then
   echo "$0: you need to provide 2nd argument date-from in YYYY-MM-DD format"
   exit 3
 fi
 if [ -z "$3" ]
-then 
+then
   echo "$0: you need to provide 3rd date-to in YYYY-MM-DD format"
   exit 4
 fi
@@ -41,6 +42,14 @@ do
   then
     echo "malformed repo ${orgrepo}, skipping"
     continue
+  fi
+  if [ -z "${INCLUDE_FORKS}" ]
+  then
+    is_fork=$(cat "/velocity/forks.json" | jq "to_entries|map(select(.key==\"${orgrepo}\"))[].value")
+    if [ "${is_fork}" = "true" ]
+    then
+      echo "${orgrepo} is a fork, skipping"
+    fi
   fi
   IFS='/'
   arr=($orgrepo)
