@@ -49,6 +49,7 @@ do
     if [ "${is_fork}" = "true" ]
     then
       echo "${orgrepo} is a fork, skipping"
+      continue
     fi
   fi
   IFS='/'
