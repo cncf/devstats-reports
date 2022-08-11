@@ -12,6 +12,7 @@ fi
 ./contributors/k8s_yearly_contributors_with_50.sh || exit 7
 if [ -z "$NOZIP" ]
 then
-  zip -9 /data/contrib.zip /data/contributors_and_emails.csv /data/contributing_actors.csv /data/contributing_actors_data.csv /data/k8s_contributors_and_emails.csv /data/top_50_k8s_yearly_contributors.csv /data/k8s_yearly_contributors_with_50.csv || exit 8
+  rm -f /data/contrib.zip || exit 8
+  zip -9 /data/contrib.zip /data/contributors_and_emails.csv /data/contributing_actors.csv /data/contributing_actors_data.csv /data/k8s_contributors_and_emails.csv /data/top_50_k8s_yearly_contributors.csv /data/k8s_yearly_contributors_with_50.csv || exit 9
 fi
 echo 'OK'
