@@ -1,8 +1,8 @@
 -- {{type}}: event_id - contributions, login - contributors
 select
   -- round(sqrt(count(distinct sub.{{type}})::numeric), 0) as "value",
-  count(distinct sub.{{type}}) as "value",
-  coalesce(sub.country_id, '') as "name"
+  coalesce(sub.country_id, '') as "country",
+  count(distinct sub.{{type}}) as "value"
 from (
   select
     a.login,

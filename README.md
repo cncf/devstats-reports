@@ -117,6 +117,7 @@ Contributors having at least N=20 contributions in PROJ=opentelementry project d
 
 - `./contributors/contributors_with_n_dtrange.sh opentelemetry "now()-'1 year'::interval" 'now()' 20`.
 
+
 # GDPR requests
 
 - SSH into `node-0` DevStats node.
@@ -125,4 +126,14 @@ Contributors having at least N=20 contributions in PROJ=opentelementry project d
 - `./sh/gdpr.sh 'Identity 1' 'name 2' 'email 3' ...`.
 - You don't need to downcase names, remove spaces, @, ! etc.
 - Finally delete reporting pod: `helm delete devstats-prod-reports` (but you can leave it running, it is just sleeping forever waiting for shell connection).
+
+
+# World map
+
+While in reporting pod:
+- `clear && GHA2DB_CSVOUT=/data/world_map.csv GHA2DB_QOUT=1 PG_DB=gha ./sh/run.sh world_map 2014-01-01 2023-02-04 {{repo_group}} '' {{type}} login` - contributors.
+- `clear && GHA2DB_CSVOUT=/data/world_map2.csv PG_DB=allprj ./sh/run.sh world_map 2014-01-01 2023-02-04 {{repo_group}} 'Kubernetes' {{type}} event_id` - contributions.
+
+Locally:
+- `wget https://devstats.cncf.io/backups/world_map.csv` - to download.
 
