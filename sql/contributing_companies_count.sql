@@ -16,4 +16,5 @@ where
     'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
     'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
   )
+  and af.{{company_name}} not in ('(Robots)')
 ;

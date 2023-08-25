@@ -19,6 +19,7 @@ from (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
+    and af.{{company_name}} not in ('(Robots)')
   group by
     af.{{company_name}}
   order by
