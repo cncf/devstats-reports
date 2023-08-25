@@ -33,13 +33,13 @@ with existing_companies as (
 )
 select
   s.new_companies as new_companies_count,
-  (s.new_companies * 100.0) / s.all_companies as percent_new_companies_count,
+  (s.new_companies * 100.0) / case when s.all_companies = 0 then 1 else s.all_companies end as percent_new_companies_count,
   s.new_companies_contributions,
-  (s.new_companies_contributions * 100.0) / s.all_companies_contributions as percent_new_companies_contributions,
+  (s.new_companies_contributions * 100.0) / case when s.all_companies_contributions = 0 then 1 else s.all_companies_contributions end as percent_new_companies_contributions,
   s.new_contributors as new_contributors_count,
-  (s.new_contributors * 100.0) / s.all_contributors as percent_new_contributors_count,
+  (s.new_contributors * 100.0) / case when s.all_contributors = 0 then 1 else s.all_contributors end as percent_new_contributors_count,
   s.new_contributors_contributions,
-  (s.new_contributors_contributions * 100.0) / s.all_contributors_contributions as percent_new_contributors_contributions
+  (s.new_contributors_contributions * 100.0) / case when s.all_contributors_contributions = 0 then 1 else s.all_contributors_contributions end as percent_new_contributors_contributions
 from (
   select
     -- those "all" values refer to dtfrom - dtto range
