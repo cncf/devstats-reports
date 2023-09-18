@@ -1,5 +1,5 @@
 #!/bin/bash
-# EXTRA_COND="\"Date from\" = '2023-01-01'' and \"Date to\" = '2024-01-01'"
+# EXTRA_COND="and \"Date from\" = '2023-01-01' and \"Date to\" = '2024-01-01'"
 if [ -z "$PG_DB" ]
 then
   echo "$0: you should specify PG_DB=db-name, using the default PG_DB=allprj"
