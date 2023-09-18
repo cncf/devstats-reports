@@ -70,7 +70,6 @@ with all_dates as (
   from
     gha_events e,
     gha_actors a,
-    gha_repos r,
     dates d
   where
     e.actor_id = a.id
