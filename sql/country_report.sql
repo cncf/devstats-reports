@@ -29,6 +29,7 @@ with all_dates as (
     all_dates
   where
     1 = 1
+    {{extra_cond}}
     -- you can limit this
     -- and "Date from" = '2014-01-01'
     -- and "Date to" = '2024-01-01'
