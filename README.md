@@ -137,3 +137,9 @@ While in reporting pod:
 Locally:
 - `wget https://devstats.cncf.io/backups/world_map.csv` - to download.
 
+
+# Country ranks
+
+This calculates countryb ranks (by the numbe rof contributors and contributions):
+
+- `` PG_DB=allprj ./sh/country_ranks.sh Poland ``.
