@@ -1,4 +1,5 @@
 #!/bin/bash
+# :set mouse-=a
 if [ -z "$PG_PASS" ]
 then
   echo "$0: you need to specify PG_PASS=..."
@@ -29,7 +30,7 @@ else
 fi
 for db in $all
 do
-  if [ "$db" = "allprj" ]
+  if ( [ "$db" = "allprj" ] || [ "$db" = "allcdf" ] || [ "$db" = "graphql" ] )
   then
     continue
   fi

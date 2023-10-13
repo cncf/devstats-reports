@@ -1,4 +1,5 @@
 #!/bin/bash
+# :set mouse-=a
 # REPOS=... - manually specify repos
 # INCLUDE_FORKS=1 - do not skip forks
 if [ -z "$PG_PASS" ]
