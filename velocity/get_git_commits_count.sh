@@ -59,6 +59,11 @@ do
   unset IFS
   org=${arr[0]}
   repo=${arr[1]}
+  if [[ "${repo::1}" == "-" ]]
+  then
+    echo "malformed repo (${repo} in ${orgrepo}), skipping"
+    continue
+  fi
   cd "${repos_dir}" && mkdir "${org}" 2>/dev/null
   cd "${org}" || echo "cannot cd to ${repos_dir}/${org} directory"
   echo "analysis ${orgrepo}"
