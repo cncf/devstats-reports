@@ -140,6 +140,6 @@ Locally:
 
 # Country ranks
 
-This calculates countryb ranks (by the numbe rof contributors and contributions):
+This calculates country ranks (by the number of contributors and contributions):
 
 - `` [EXTRA_COND="and \"Date from\" = '2023-01-01' and \"Date to\" = '2024-01-01'"] PG_DB=allprj ./sh/country_ranks.sh Poland ``.
