@@ -145,3 +145,4 @@ This calculates country ranks (by the number of contributors and contributions):
 - `` [EXTRA_COND="and \"Date from\" = '2023-01-01' and \"Date to\" = '2024-01-01'"] PG_DB=allprj ./sh/country_ranks.sh Poland ``.
 - Then get the generated CSV: `` wget https://devstats.cncf.io/backups/Poland_country_ranks_in_allprj.csv ``.
 - Make a copy of [this China report](https://docs.google.com/spreadsheets/d/1yjPjQIlW4i9frl103bmb66ibNt-G2CIre-hWJtYHNgc/edit#gid=0) and replace with some other country stats.
+- Example report for [India](https://docs.google.com/spreadsheets/d/18qfMVFIUkaBpVhXvvidWXyxG1IGdnMwUhTw-WdZoPmA/edit?usp=sharing).
