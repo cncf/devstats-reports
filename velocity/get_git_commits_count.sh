@@ -36,6 +36,7 @@ function finish {
   rm -rf "${repos_dir}"
 }
 trap finish EXIT
+export GIT_TERMINAL_PROMPT=0
 for orgrepo in $repos
 do
   if [[ ! $orgrepo == *"/"* ]]
@@ -60,7 +61,7 @@ do
   cd "${repos_dir}" && mkdir "${org}" 2>/dev/null
   cd "${org}" || echo "cannot cd to ${repos_dir}/${org} directory"
   echo "analysis ${orgrepo}"
-  GIT_TERMINAL_PROMPT=0 git clone -n "https://github.com/${orgrepo}.git" 1>/dev/null 2>/dev/null && cd "${repo}" && git log --all --pretty=format:"%aE~~~~%cE~~~~%H" --since="${2}" --until="${3}" >> "${log}" 2>/dev/null
+  git clone -n "https://github.com/${orgrepo}.git" 1>/dev/null 2>/dev/null && cd "${repo}" && git log --all --pretty=format:"%aE~~~~%cE~~~~%H" --since="${2}" --until="${3}" >> "${log}" 2>/dev/null
   if [ ! "$?" = "0" ]
   then
     echo "problems getting $orgrepo git log"

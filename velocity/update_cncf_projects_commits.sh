@@ -17,7 +17,10 @@ fi
 from="${1}"
 to="${2}"
 fn="data/data_cncf_update_${from}_${to}.csv"
-echo 'project,key,value' > "${fn}"
+if [ ! -f "${fn}" ]
+then
+  echo 'project,key,value' > "${fn}"
+fi
 if [ -z "$ONLY" ]
 then
   all=`cat velocity/all_prod_dbs.txt`
