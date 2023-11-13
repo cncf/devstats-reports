@@ -44,7 +44,7 @@ with all_dates as (
   from
     gha_events e,
     gha_actors a,
-    gha_repos r,
+    gha_repo_groups r,
     dates d
   where
     e.actor_id = a.id
@@ -55,6 +55,9 @@ with all_dates as (
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
     and length(a.country_id) = 2
+    and r.repo_group != 'CNCF'
+    and r.repo_group is not null
+    and r.repo_group != ''
   group by
     d."Date from",
     d."Date to",
@@ -78,6 +81,9 @@ with all_dates as (
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
     and length(a.country_id) = 2
+    and r.repo_group != 'CNCF'
+    and r.repo_group is not null
+    and r.repo_group != ''
   group by
     d."Date from",
     d."Date to",
@@ -113,7 +119,7 @@ with all_dates as (
   from
     gha_events e,
     gha_actors a,
-    gha_repos r,
+    gha_repo_groups r,
     dates d
   where
     e.actor_id = a.id
@@ -124,10 +130,13 @@ with all_dates as (
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
     and length(a.country_id) = 2
+    and r.repo_group != 'CNCF'
+    and r.repo_group is not null
+    and r.repo_group != ''
   group by
-  d."Date from",
-  d."Date to",
-  r.repo_group
+    d."Date from",
+    d."Date to",
+    r.repo_group
   union select
     d."Date from",
     d."Date to",
@@ -145,9 +154,12 @@ with all_dates as (
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
     and length(a.country_id) = 2
+    and r.repo_group != 'CNCF'
+    and r.repo_group is not null
+    and r.repo_group != ''
   group by
-  d."Date from",
-  d."Date to"
+    d."Date from",
+    d."Date to"
 )
 select
   cd."Date from",
