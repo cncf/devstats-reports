@@ -72,11 +72,14 @@ with all_dates as (
     count(e.id) as "Contributions"
   from
     gha_events e,
+    gha_repo_groups r,
     gha_actors a,
     dates d
   where
     e.actor_id = a.id
     and e.dup_actor_login = a.login
+    and e.repo_id = r.id
+    and e.dup_repo_name = r.name
     and (lower(a.login) {{exclude_bots}})
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
@@ -146,10 +149,13 @@ with all_dates as (
   from
     gha_events e,
     gha_actors a,
+    gha_repo_groups r,
     dates d
   where
     e.actor_id = a.id
     and e.dup_actor_login = a.login
+    and e.repo_id = r.id
+    and e.dup_repo_name = r.name
     and (lower(a.login) {{exclude_bots}})
     and e.created_at > d."Date from"
     and e.created_at < d."Date to"
