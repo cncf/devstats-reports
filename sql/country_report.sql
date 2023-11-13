@@ -188,7 +188,7 @@ where
   and cd."Date to" = ad."Date to"
   and cd."Country" = '{{country}}'
 order by
-  cd."Date from",
-  cd."Date to",
+  cd."Date from" asc,
+  cd."Date to" desc,
   "{{country}} Contributors Percent" desc
 ;
