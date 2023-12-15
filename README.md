@@ -109,6 +109,8 @@ Documentation:
 # Company contributors
 
 - `` clear; PG_DB=allprj ./affs/company_contributors.sh Apple ``.
+- `` clear; PG_DB=allprj ./affs/company_contributors_repo_groups.sh Apple ``.
+- They generate files for download, like: `` wget https://devstats.cncf.io/backups/allprj_Adobe_Inc__contributors.csv ``.
 
 
 # Contributors having at least N
