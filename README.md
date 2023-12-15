@@ -7,8 +7,8 @@ Various reports generated from DevStats databases
 On bare metal:
 
 - For available reports, do: `ls sql/`. Use any file without `.sql` extension, for example: developers, issues, prs, commits etc.
-- Running single report: `PG_PASS=...  ./sh/run.sh (developers|issues|prs|..|contributing_companies_list) 2016-01-01 2017-01-01`.
-- Some reports require passing additional parameters, example: `PG_PASS=...  ./sh/run.sh company_contributions 2016-01-01 2017-01-01 {{type}} known {{company}} Google`.
+- Running single report: `PG_PASS=... ./sh/run.sh (developers|issues|prs|..|contributing_companies_list) 2016-01-01 2017-01-01`.
+- Some reports require passing additional parameters, example: `PG_PASS=... ./sh/run.sh company_contributions 2016-01-01 2017-01-01 {{type}} known {{company}} Google`.
 - Running report for multiple date ranges: `[SKIPDT=1] PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list) {{actor}} author`.
 - Running cumulative report: `CUMULATIVE=2014-01-01 PG_PASS=... ./sh/rep.sh (quarters|years|join|YYYY-MM-DD) (developers|developers_count|...|contributing_companies_list) {{actor}} author`.
 - Additional parameters example: `SKIPDT=1 PG_PASS=... ./sh/rep.sh years company_contributions {{type}} all {{company}} 'Red Hat'`.
@@ -52,7 +52,7 @@ Details about running reports pod:
 
 Company contributions:
 
-- `` PG_DB=prometheus PG_PASS=...  ./sh/run.sh contributing_companies_list 2014-01-01 2020-01-01 {{lim}} 8 ``.
+- `` PG_DB=prometheus PG_PASS=... ./sh/run.sh contributing_companies_list 2014-01-01 2020-01-01 {{lim}} 8 ``.
 - `` PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters company_contributions {{type}} known {{company}} 'Robust Perception' ``.
 - `` SKIPDT=1 PG_DB=prometheus PG_PASS=... ./sh/rep.sh quarters company_contributions {{type}} known {{company}} 'Red Hat' ``.
 
@@ -106,11 +106,21 @@ Documentation:
 - `` PG_PASS=... CUMULATIVE=2010-01-01 SKIPDT='' PG_DB=prometheus ./sh/rep.sh months documentation {{actor}} author ``.
 
 
-# Company contributors
+# Company reports
 
 - `` clear; PG_DB=allprj ./affs/company_contributors.sh Apple ``.
-- `` clear; PG_DB=allprj ./affs/company_contributors_repo_groups.sh Apple ``.
+- `` clear; PG_DB=allprj ./affs/company_contributors_repo_groups.sh 'Adobe Inc.' ``.
 - They generate files for download, like: `` wget https://devstats.cncf.io/backups/allprj_Adobe_Inc__contributors.csv ``.
+
+PRs:
+- Company PRs monthly chart: `` PG_DB=allprj ./sh/rep.sh months company_prs {{company_name}} company_name {{company}} 'Adobe Inc.'; mv out.csv /data/adobe_monthly_prs.csv ``. Then `` wget https://devstats.cncf.io/backups/adobe_monthly_prs.csv ``.
+- Company PRs total value: `` PG_DB=allprj ./sh/run.sh company_prs 2014-01-01 2024-01-01 {{company_name}} company_name {{company}} 'Adobe Inc.' ``.
+- Company PRs monthly chart (cumulative): `` PG_DB=allprj CUMULATIVE=2010-01-01 ./sh/rep.sh months company_prs {{company_name}} company_name {{company}} 'Adobe Inc.'; mv out.csv /data/adobe_monthly_prs_cum.csv ``. Then `` wget https://devstats.cncf.io/backups/adobe_monthly_prs_cum.csv ``.
+
+Commits:
+- Company commits monthly chart: `` PG_DB=allprj ./sh/rep.sh months company_commits {{company_name}} company_name {{company}} 'Adobe Inc.' {{type}} known {{actor}} actor|author|committer; mv out.csv /data/adobe_monthly_commits.csv ``. Then `` wget https://devstats.cncf.io/backups/adobe_monthly_commits.csv ``.
+- Company commits total value: `` PG_DB=allprj ./sh/run.sh company_commits 2014-01-01 2024-01-01 {{company_name}} company_name {{company}} 'Adobe Inc.' {{type}} known {{actor}} actor ``.
+- Company commits monthly chart (cumulative): `` PG_DB=allprj CUMULATIVE=2010-01-01 ./sh/rep.sh months company_commits {{company_name}} company_name {{company}} 'Adobe Inc.' {{type}} known {{actor}} actor; mv out.csv /data/adobe_monthly_commits_cum.csv ``. Then `` wget https://devstats.cncf.io/backups/adobe_monthly_commits_cum.csv ``.
 
 
 # Contributors having at least N
