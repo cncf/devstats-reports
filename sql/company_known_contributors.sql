@@ -1,5 +1,6 @@
 with contributions as (
-  select c.committer_id as actor_id,
+  select
+    c.committer_id as actor_id,
     c.dup_committer_login as actor,
     c.event_id
   from
@@ -9,10 +10,11 @@ with contributions as (
     aa.actor_id = c.committer_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    -- and aa.{{company_name}} = '{{company}}'
     and c.committer_id is not null
     and (lower(c.dup_committer_login) {{exclude_bots}})
-  union select c.author_id as actor_id,
+  union
+  select
+    c.author_id as actor_id,
     c.dup_author_login as actor,
     c.event_id
   from
@@ -22,10 +24,11 @@ with contributions as (
     aa.actor_id = c.author_id
     and c.dup_created_at >= aa.dt_from
     and c.dup_created_at < aa.dt_to
-    -- and aa.{{company_name}} = '{{company}}'
     and c.author_id is not null
     and (lower(c.dup_author_login) {{exclude_bots}})
-  union select e.actor_id,
+  union
+  select
+    e.actor_id,
     e.dup_actor_login as actor,
     e.id as event_id
   from
@@ -35,16 +38,20 @@ with contributions as (
     aa.actor_id = e.actor_id
     and e.created_at >= aa.dt_from
     and e.created_at < aa.dt_to
-    -- and aa.{{company_name}} = '{{company}}'
     and e.type in (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
     and (lower(e.dup_actor_login) {{exclude_bots}})
 ), known_contributions as (
-  select distinct c.committer_id as actor_id,
+  select distinct
+    c.committer_id as actor_id,
     c.dup_committer_login as actor,
     c.event_id,
+    c.dup_created_at as created_at,
+    aa.dt_from,
+    aa.dt_to,
+    a.country_name,
     coalesce(string_agg(distinct an.name, ', '), '-') as names
   from
     gha_commits c,
@@ -64,10 +71,16 @@ with contributions as (
     and c.dup_created_at < aa.dt_to
     and aa.{{company_name}} = '{{company}}'
   group by
-    1, 2, 3
-  union select distinct c.author_id as actor_id,
+    1, 2, 3, 4, 5, 6, 7
+  union
+  select distinct
+    c.author_id as actor_id,
     c.dup_author_login as actor,
     c.event_id,
+    c.dup_created_at as created_at,
+    aa.dt_from,
+    aa.dt_to,
+    a.country_name,
     coalesce(string_agg(distinct an.name, ', '), '-') as names
   from
     gha_commits c,
@@ -87,10 +100,16 @@ with contributions as (
     and c.dup_created_at < aa.dt_to
     and aa.{{company_name}} = '{{company}}'
   group by
-    1, 2, 3
-  union select distinct e.actor_id,
+    1, 2, 3, 4, 5, 6, 7
+  union
+  select distinct
+    e.actor_id,
     e.dup_actor_login as actor,
     e.id as event_id,
+    e.created_at,
+    aa.dt_from,
+    aa.dt_to,
+    a.country_name,
     coalesce(string_agg(distinct an.name, ', '), '-') as names
   from
     gha_events e,
@@ -113,7 +132,7 @@ with contributions as (
     and e.created_at < aa.dt_to
     and aa.{{company_name}} = '{{company}}'
   group by
-    1, 2, 3
+    1, 2, 3, 4, 5, 6, 7
 ), contributors as (
   select actor,
     count(distinct event_id) as contributions
@@ -127,27 +146,39 @@ with contributions as (
   select
     actor,
     names,
+    country_name,
+    to_char(min(created_at), 'MM/DD/YYYY') as first_contribution,
+    to_char(max(created_at), 'MM/DD/YYYY') as last_contribution,
+    to_char(min(dt_from), 'MM/DD/YYYY') as affiliated_from,
+    to_char(max(dt_to), 'MM/DD/YYYY') as affiliated_to,
     count(distinct event_id) as contributions
   from
     known_contributions
   group by
     actor,
-    names
+    names,
+    country_name
   order by
     contributions desc
 ), all_contributions as (
-  select sum(contributions) as cnt
+  select
+    sum(contributions) as cnt
   from
     contributors
 )
 select
   row_number() over cumulative_contributions as rank_number,
   c.actor,
-  c.names,
+  c.names as actor_names,
+  c.country_name,
   c.contributions,
-  round((c.contributions * 100.0) / a.cnt, 5) as percent,
+  round((c.contributions * 100.0) / a.cnt, 5) as percent_of_all,
   sum(c.contributions) over cumulative_contributions as cumulative_sum,
   round((sum(c.contributions) over cumulative_contributions * 100.0) / a.cnt, 5) as cumulative_percent,
+  first_contribution,
+  last_contribution,
+  case affiliated_from = '01/01/1900' when true then '' else affiliated_from end as affiliated_from,
+  case affiliated_to = '01/01/2100' when true then '' else affiliated_to end as affiliated_to,
   a.cnt as all_contributions
 from
   known_contributors c,

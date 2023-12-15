@@ -14,4 +14,4 @@ then
   echo "$0: you need to set company as a 1st argument, for example $0 'Apple'"
   exit 2
 fi
-GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_CSVOUT="data/${PG_DB}_company_contributors.csv" runq sql/company_known_contributors.sql {{exclude_bots}} "`cat /etc/gha2db/util_sql/exclude_bots.sql`" {{company_name}} company_name {{company}} "${1}"
+GHA2DB_LOCAL=1 GHA2DB_SKIPTIME=1 GHA2DB_CSVOUT="data/${PG_DB}_${1//[ .]/_}_contributors.csv" runq sql/company_known_contributors.sql {{exclude_bots}} "`cat /etc/gha2db/util_sql/exclude_bots.sql`" {{company_name}} company_name {{company}} "${1}"
