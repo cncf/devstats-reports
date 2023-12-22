@@ -168,6 +168,22 @@ For contributors we can have 3 situations:
 - contributor has partial affiliations defined (date ranges does not cover all time) and some of his/her contributions are known and others unknown - we call this mixed affiliation.
 - You can run SQL to generate this data for any CNCF project for all time: `sql/percent_known_contributors.sql`.
 - You can also run for a specific time range and CNCF project: `` PG_DB=allprj ./sh/run.sh contributions_affiliations_quality_percent 2023-01-01 2024-01-01 {{company_name}} company_name ``.
+- Example result for all CNCF projects combined for all time:
+
+```
+devstats-reports:/# PG_DB=allprj ./sh/run.sh contributors_affiliations_quality_percent 2014-01-01 2024-01-01 {{company_name}} company_name
+Compiled 2023-10-12_04:48:13AM, commit: 989cef61420a093e10d0a251408b6a4986133996 on Linux_darkstar_5.4.0-81-generic_#91-Ubuntu_SMP_Thu_Jul_15_19:09:17_UTC_2021_x86_64_x86_64_x86_64_GNU/Linux using go_version_go1.20.3_linux/amd64
+/----------------------+------------------------+----------------------+------------------------+------------------+----------------+-------------------+-------------------+-------------------+-------------------+----------------------\
+|known_contributors_max|unknown_contributors_max|known_contributors_min|unknown_contributors_min|mixed_contributors|all_contributors|percent_known_max  |percent_unknown_max|percent_known_min  |percent_unknown_min|percent_mixed         |
++----------------------+------------------------+----------------------+------------------------+------------------+----------------+-------------------+-------------------+-------------------+-------------------+----------------------+
+|40729                 |186059                  |40715                 |186045                  |14                |226774          |17.9601718010001147|82.0460017462319314|17.9539982537680686|82.0398281989998853|0.00617354723204600175|
+\----------------------+------------------------+----------------------+------------------------+------------------+----------------+-------------------+-------------------+-------------------+-------------------+----------------------/
+Rows: 1
+Time: 1m6.445201838s
+```
+
+This means that we know about 17.95% - 17.96% of all contributors (note that this number will be much higer for contributions, for contributors there is a very long tail of contributors making 1-3 contributions that were not checked yet).
+
 
 For contributions we can have a similar 3 situaltions:
 - contribution (like commit) can have up to 3 contributors: pusher/actor, committer and author.
@@ -176,3 +192,21 @@ For contributions we can have a similar 3 situaltions:
 - if we know affiliation details for some contributors and don't know for others then that contribution is mixed.
 - You can run SQL to generate this data for any CNCF project for all time: `sql/percent_known_contributors.sql`.
 - You can also run for a specific time range and CNCF project: `` PG_DB=grpc ./sh/run.sh contributors_affiliations_quality_percent 2020-01-01 2022-01-01 {{company_name}} company_name ``.
+- Example result for all CNCF projects combined for all time:
+
+```
+devstats-reports:/# PG_DB=allprj ./sh/run.sh contributions_affiliations_quality_percent 2014-01-01 2024-01-01 {{company_name}} company_name
+Compiled 2023-10-12_04:48:13AM, commit: 989cef61420a093e10d0a251408b6a4986133996 on Linux_darkstar_5.4.0-81-generic_#91-Ubuntu_SMP_Thu_Jul_15_19:09:17_UTC_2021_x86_64_x86_64_x86_64_GNU/Linux using go_version_go1.20.3_linux/amd64
+/-----------------------+-------------------------+-----------------------+-------------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------------\
+|known_contributions_max|unknown_contributions_max|known_contributions_min|unknown_contributions_min|all_contributions|mixed_contributions|percent_known_max  |percent_unknown_max|percent_known_min  |percent_unknown_min|percent_mixed         |
++-----------------------+-------------------------+-----------------------+-------------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------------+
+|13333382               |1862500                  |13236307               |1765425                  |15098807         |97075              |88.3075199252497234|12.3354116653057424|87.6645883346942576|11.6924800747502766|0.64293159055546573978|
+\-----------------------+-------------------------+-----------------------+-------------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------------/
+Rows: 1
+Time: 24.820014137s
+```
+
+This means that we know about 87.66% - 88.3% affilaitions of all contributions across all CNCF projects and across all time.
+
+So as of 12/22/2023 we know company affiliations for about 88% of all contributions and we know about 18% of all contributors contributiong to all projects - and those a bit less than 20% contributors made almost 90% of all contributions across all time and all projects.
+
