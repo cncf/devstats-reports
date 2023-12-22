@@ -53,7 +53,7 @@ from (
       and af.dt_to > c.dup_created_at
     where
       c.committer_id is not null
-      c.dup_created_at >= '{{dtfrom}}'
+      and c.dup_created_at >= '{{dtfrom}}'
       and c.dup_created_at < '{{dtto}}'
       and (lower(c.dup_committer_login) {{exclude_bots}})
     union select
@@ -71,7 +71,7 @@ from (
       and af.dt_to > c.dup_created_at
     where
       c.author_id is not null
-      c.dup_created_at >= '{{dtfrom}}'
+      and c.dup_created_at >= '{{dtfrom}}'
       and c.dup_created_at < '{{dtto}}'
       and (lower(c.dup_author_login) {{exclude_bots}})
   ) c
