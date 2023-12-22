@@ -158,3 +158,21 @@ This calculates country ranks (by the number of contributors and contributions):
 - Then get the generated CSV: `` wget https://devstats.cncf.io/backups/Poland_country_ranks_in_allprj.csv ``.
 - Make a copy of [this China report](https://docs.google.com/spreadsheets/d/1yjPjQIlW4i9frl103bmb66ibNt-G2CIre-hWJtYHNgc/edit#gid=0) and replace with some other country stats.
 - Example report for [India](https://docs.google.com/spreadsheets/d/18qfMVFIUkaBpVhXvvidWXyxG1IGdnMwUhTw-WdZoPmA/edit?usp=sharing).
+
+
+# Known/unknown contributors/contributions
+
+For contributors we can have 3 situations:
+- contributor without any affiliations defined - all his/her contributions are unknown.
+- contributor with fully defined affiliations - all his/her contributions are affiliated to a company or marked as independent.
+- contributor has partial affiliations defined (date ranges does not cover all time) and some of his/her contributions are known and others unknown - we call this mixed affiliation.
+- You can run SQL to generate this data for any CNCF project for all time: `sql/percent_known_contributors.sql`.
+- You can also run for a specific time range and CNCF project: `` PG_DB=allprj ./sh/run.sh contributions_affiliations_quality_percent 2023-01-01 2024-01-01 {{company_name}} company_name ``.
+
+For contributions we can have a similar 3 situaltions:
+- contribution (like commit) can have up to 3 contributors: pusher/actor, committer and author.
+- if all contribution's contributors affiliations are known at the contribution's create time then contribution is known.
+- if none of contribution's contributors affiliations are known at that date then contribution is unknown.
+- if we know affiliation details for some contributors and don't know for others then that contribution is mixed.
+- You can run SQL to generate this data for any CNCF project for all time: `sql/percent_known_contributors.sql`.
+- You can also run for a specific time range and CNCF project: `` PG_DB=grpc ./sh/run.sh contributors_affiliations_quality_percent 2020-01-01 2022-01-01 {{company_name}} company_name ``.
