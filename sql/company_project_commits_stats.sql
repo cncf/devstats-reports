@@ -17,8 +17,8 @@ with commits_data as (
     and af.company_name not in ('Independent', '(Robots)', 'CNCF')
     and rg.repo_group not in ('CNCF')
     and (lower(c.dup_actor_login) {{exclude_bots}})
-    and c.dup_created_at >= '{{from}}'
-    and c.dup_created_at < '{{to}}'
+    and c.dup_created_at >= '{{dtfrom}}'
+    and c.dup_created_at < '{{dtto}}'
   union select
     rg.repo_group as project,
     af.company_name as company,
@@ -38,8 +38,8 @@ with commits_data as (
     and af.company_name not in ('Independent', '(Robots)', 'CNCF')
     and rg.repo_group not in ('CNCF')
     and (lower(c.dup_author_login) {{exclude_bots}})
-    and c.dup_created_at >= '{{from}}'
-    and c.dup_created_at < '{{to}}'
+    and c.dup_created_at >= '{{dtfrom}}'
+    and c.dup_created_at < '{{dtto}}'
   union select
     rg.repo_group as project,
     af.company_name as company,
@@ -59,8 +59,8 @@ with commits_data as (
     and af.company_name not in ('Independent', '(Robots)', 'CNCF')
     and rg.repo_group not in ('CNCF')
     and (lower(c.dup_committer_login) {{exclude_bots}})
-    and c.dup_created_at >= '{{from}}'
-    and c.dup_created_at < '{{to}}'
+    and c.dup_created_at >= '{{dtfrom}}'
+    and c.dup_created_at < '{{dtto}}'
 ), company_project_commits as (
   select
     company,

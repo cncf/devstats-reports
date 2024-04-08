@@ -210,3 +210,12 @@ This means that we know about 87.66% - 88.3% affilaitions of all contributions a
 
 So as of 12/22/2023 we know company affiliations for about 88% of all contributions and we know about 18% of all contributors contributiong to all projects - and those a bit less than 20% contributors made almost 90% of all contributions across all time and all projects.
 
+
+# Commits stats for projects and companies
+
+While in the reporting pod run:
+- `` PG_DB=allprj GHA2DB_CSVOUT=/data/company_project_commits_stats.csv ./sh/run.sh company_project_commits_stats 2014-01-01 2025-01-01 {{limit_companies}} 50 {{limit_projects}} 50 ``.
+
+Locally:
+
+- `` wget https://devstats.cncf.io/backups/company_project_commits_stats.csv `` - to download results.
