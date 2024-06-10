@@ -1,3 +1,4 @@
+-- copy (
 with vendor_data as (
   select
     aa.company_name as vendor,
@@ -90,4 +91,4 @@ group by
 order by
   year asc,
   pr_authors desc
-;
+-- ) to stdout with csv header
