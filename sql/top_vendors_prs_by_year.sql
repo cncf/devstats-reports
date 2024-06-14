@@ -1,4 +1,4 @@
--- copy (
+copy (
 with vendor_data as (
   select
     aa.company_name as vendor,
@@ -67,7 +67,7 @@ from
 inner join
   gha_actors_affiliations aa
 on
-  i.dup_user_id = aa.actor_id
+  i.user_id = aa.actor_id
   and i.created_at >= aa.dt_from
   and i.created_at < aa.dt_to
   and aa.company_name not in (
@@ -91,4 +91,4 @@ group by
 order by
   year asc,
   pr_authors desc
--- ) to stdout with csv header
+) to stdout with csv header
