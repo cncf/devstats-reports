@@ -60,14 +60,14 @@ with vendor_data as (
 select
   extract(year from i.created_at) as year,
   v.vendor as vendor,
-  count(distinct i.dup_actor_login) as pr_authors,
+  count(distinct i.dup_user_login) as pr_authors,
   count(distinct i.dup_repo_name || i.number) as prs
 from
   gha_issues i
 inner join
   gha_actors_affiliations aa
 on
-  i.dup_actor_id = aa.actor_id
+  i.dup_user_id = aa.actor_id
   and i.created_at >= aa.dt_from
   and i.created_at < aa.dt_to
   and aa.company_name not in (
@@ -78,7 +78,7 @@ inner join
 on
   v.vendor = aa.company_name
 where
-  i.dup_actor_login not ilike all(
+  i.dup_user_login not ilike all(
     select
       pattern
     from
