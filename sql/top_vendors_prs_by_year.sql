@@ -20,7 +20,7 @@ with vendor_data as (
       'IssuesEvent', 'PullRequestEvent', 'PushEvent', 'CommitCommentEvent',
       'IssueCommentEvent', 'PullRequestReviewCommentEvent', 'PullRequestReviewEvent'
     )
-    and e.dup_actor_login not ilike all(
+    and lower(e.dup_actor_login) not ilike any(
       select
         pattern
       from
@@ -78,7 +78,7 @@ inner join
 on
   v.vendor = aa.company_name
 where
-  i.dup_user_login not ilike all(
+  lower(i.dup_user_login) not ilike any(
     select
       pattern
     from
