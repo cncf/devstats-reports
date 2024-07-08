@@ -67,6 +67,7 @@ do
   cd "${repos_dir}" && mkdir "${org}" 2>/dev/null
   cd "${org}" || echo "cannot cd to ${repos_dir}/${org} directory"
   echo "analysis ${orgrepo}"
+  s=$(date +%s%N)
   git clone -n "https://github.com/${orgrepo}.git" 1>/dev/null 2>/dev/null && cd "${repo}" && git log --all --pretty=format:"%aE~~~~%cE~~~~%H" --since="${2}" --until="${3}" >> "${log}" 2>/dev/null
   if [ ! "$?" = "0" ]
   then
@@ -74,6 +75,10 @@ do
   else
     echo "" >> "${log}"
   fi
+  e=$(date +%s%N)
+  t=$((e - s))
+  t=$((t / 1000000000))
+  echo "analysis ${orgrepo}: took $t s."
   cd .. && rm -rf "${repo}"
 done
 cd "${cwd}"
