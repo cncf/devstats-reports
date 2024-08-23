@@ -219,3 +219,11 @@ While in the reporting pod run:
 Locally:
 
 - `` wget https://devstats.cncf.io/backups/company_project_commits_stats.csv `` - to download results.
+
+
+# New companies after/since CNCF join
+
+Example:
+
+- `` PG_DB=etcd GHA2DB_CSVOUT=/data/etcd_new_companies.csv ./sh/custom.sh new_companies_list_after_date {{company_name}} company_name {{dtjoin}} 2018-12-11 ``.
+- `` wget https://devstats.cncf.io/backups/etcd_new_companies.csv ``.
