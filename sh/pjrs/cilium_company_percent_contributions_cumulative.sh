@@ -1,0 +1,2 @@
+#!/bin/bash
+STOP=1 PRINT_ITEM=1 PRINT_DO=1 ITEMS='Isovalent@@Google LLC@@Cloudflare Inc@@SUSE LLC@@Solo.io@@DaoCloud Network Technology Co. Ltd.@@Cisco@@F5 Networks Inc.@@Imhotep@@Fortress Reklamebyrå@@Red Hat Inc.@@Datadog Inc@@Pixel Point@@Samsara Networks Inc@@Palantir Technologies Inc.@@Independent' DO='clear@@SKIPDT=1 CUMULATIVE=2016-07-01 PG_DB=cilium ./sh/rep.sh quarters company_contributions_percent {{type}} known {{company_name}} company_name {{company}} ##@@cat out.csv' ./sh/for_each_do.sh
