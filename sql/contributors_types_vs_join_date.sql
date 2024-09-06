@@ -1,7 +1,8 @@
 -- etcd join date
--- \set join_date '2018-12-11'
+\set join_date '2018-12-11'
 -- Cilium join date
-\set join_date '2021-10-13'
+-- \set join_date '2021-10-13'
+
 -- Before join
 select count(distinct e.actor_id) as "Contributors before join" from gha_events e left join gha_actors_affiliations aa on aa.actor_id = e.actor_id and aa.dt_from <= e.created_at and aa.dt_to > e.created_at where e.type in ('PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent', 'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent') and e.created_at < :'join_date';
 select count(distinct e.actor_id) as "Affiliated contributors before join" from gha_events e left join gha_actors_affiliations aa on aa.actor_id = e.actor_id and aa.dt_from <= e.created_at and aa.dt_to > e.created_at where e.type in ('PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent', 'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent') and e.created_at < :'join_date' and aa.company_name is not null and lower(aa.company_name) != 'independent';
