@@ -1,7 +1,8 @@
 with data as (
   select
     dup_actor_login as id,
-    created_at as dt
+    min(created_at) as midt,
+    max(created_at) as madt
   from
     gha_events
   where
@@ -10,20 +11,20 @@ with data as (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
+  group by
+    id
 ), aggs as (
   select
     count(distinct id) as al,
-    count(distinct id) filter (where dt < '{{dtto}}') as before,
-    count(distinct id) filter (where dt >= '{{dtto}}') as after,
-    count(distinct id) filter (where dt >= '{{dtto}}' and id not in (select id from data where dt < '{{dtto}}')) as new
+    count(distinct id) filter (where midt < '{{dtto}}') as before,
+    count(distinct id) filter (where madt >= '{{dtto}}') as after
   from
     data
 )
 select
   al,
   before,
-  after,
-  new
+  after
 from
   aggs
 ;
