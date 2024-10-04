@@ -1,37 +1,29 @@
-with before as (
+with data as (
   select
-    count(distinct dup_actor_login) as contributors
+    dup_actor_login as id,
+    created_at as dt
   from
     gha_events
   where
-    created_at < '{{dtto}}'
-    and (lower(dup_actor_login) {{exclude_bots}})
+    (lower(dup_actor_login) {{exclude_bots}})
     and type in (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
-), after as (
+), aggs as (
   select
-    count(distinct dup_actor_login) as contributors
+    count(distinct id) as al,
+    count(distinct id) filter (where dt < '{{dtto}}') as before,
+    count(distinct id) filter (where dt >= '{{dtto}}') as after,
+    count(distinct id) filter (where dt >= '{{dtto}}' and id not in (select id from data where dt < '{{dtto}}')) as new
   from
-    gha_events
-  where
-    created_at >= '{{dtto}}'
-    and (lower(dup_actor_login) {{exclude_bots}})
-    and type in (
-      'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
-      'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
-    )
+    data
 )
 select
-  b.contributors as before,
-  a.contributors as after,
-  a.contributors - b.contributors as delta,
-  case b.contributors = 0
-    when true then 100.0
-    else 100.0 * (a.contributors - b.contributors)::float / b.contributors::float
-  end as percent_change
+  al,
+  before,
+  after,
+  new
 from
-  before b,
-  after a
+  aggs
 ;
