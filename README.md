@@ -217,7 +217,6 @@ While in the reporting pod run:
 - `` PG_DB=allprj GHA2DB_CSVOUT=/data/company_project_commits_stats.csv ./sh/run.sh company_project_commits_stats 2014-01-01 2025-01-01 {{limit_companies}} 50 {{limit_projects}} 50 ``.
 
 Locally:
-
 - `` wget https://devstats.cncf.io/backups/company_project_commits_stats.csv `` - to download results.
 
 
@@ -227,3 +226,12 @@ Example:
 
 - `` PG_DB=etcd GHA2DB_CSVOUT=/data/etcd_new_companies.csv ./sh/custom.sh new_companies_list_after_date {{company_name}} company_name {{dtjoin}} 2018-12-11 ``.
 - `` wget https://devstats.cncf.io/backups/etcd_new_companies.csv ``.
+
+
+# Rust projects
+
+While in the reporting pod run:
+- `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects.csv ./sh/run.sh rust_projects ``.
+
+Locally:
+- `` wget https://devstats.cncf.io/backups/rust_projects.csv `` - to download results.
