@@ -12,6 +12,9 @@ from (
     gha_events_commits_files
   group by
     repo_group
+  where
+    dt >= '{{dtfrom}}'
+    and dt < '{{dtto}}'
   union select
     'All' as project,
     count(distinct path) as files,
@@ -20,6 +23,9 @@ from (
     count(distinct sha) filter (where lower(ext) = 'rs') as rust_file_activities
   from
     gha_events_commits_files
+  where
+    dt >= '{{dtfrom}}'
+    and dt < '{{dtto}}'
   ) i
 where
   i.rust_file_activities > 0

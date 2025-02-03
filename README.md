@@ -231,7 +231,7 @@ Example:
 # Rust projects
 
 While in the reporting pod run:
-- `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects.csv ./sh/run.sh rust_projects ``.
+- `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects.csv ./sh/run.sh rust_projects 2000-01-01 2026-01-01 ``.
 
 Locally:
 - `` wget https://devstats.cncf.io/backups/rust_projects.csv `` - to download results.
