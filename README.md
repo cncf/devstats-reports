@@ -239,6 +239,6 @@ Locally:
 - `` wget https://devstats.cncf.io/backups/rust_projects_by_files.csv `` - to download results.
 
 
-For over-time (yearly) report use: `` PG_DB=allprj ./sh/rust_by_year.sh `` on the reporting pod.
+For over-time (yearly) report use: `` PG_DB=allprj ./sh/rust_by_year.sh ``, `` PG_DB=allprj ./sh/rust_by_year_cumulative.sh `` on the reporting pod.
 
 And then `` ./sh/get_rust_by_year.sh `` locally.
