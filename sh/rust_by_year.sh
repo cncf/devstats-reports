@@ -9,4 +9,6 @@ do
   ary=($df)
   y="${ary[0]}"
   GHA2DB_CSVOUT="/data/rust_projects_${y}.csv" ./sh/run.sh rust_projects "${dfrom}" "${dto}"
+  GHA2DB_CSVOUT="/data/rust_projects_by_files_${y}.csv" ./sh/run.sh rust_projects_by_files "${dfrom}" "${dto}"
+  GHA2DB_CSVOUT="/data/rust_projects_by_n_files_${y}.csv" ./sh/run.sh rust_projects_by_n_files "${dfrom}" "${dto}"
 done

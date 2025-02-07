@@ -233,12 +233,14 @@ Example:
 While in the reporting pod run:
 - `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects.csv ./sh/run.sh rust_projects 2000-01-01 2026-01-01 ``.
 - `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects_by_files.csv ./sh/run.sh rust_projects_by_files 2000-01-01 2026-01-01 ``.
+- `` PG_DB=allprj GHA2DB_CSVOUT=/data/rust_projects_by_n_files.csv ./sh/run.sh rust_projects_by_n_files 2000-01-01 2026-01-01 ``.
 
 Locally:
 - `` wget https://devstats.cncf.io/backups/rust_projects.csv `` - to download results.
 - `` wget https://devstats.cncf.io/backups/rust_projects_by_files.csv `` - to download results.
+- `` wget https://devstats.cncf.io/backups/rust_projects_by_n_files.csv `` - to download results.
 
 
-For over-time (yearly) report use: `` PG_DB=allprj ./sh/rust_by_year.sh ``, `` PG_DB=allprj ./sh/rust_by_year_cumulative.sh `` on the reporting pod.
+For over-time (yearly) report use: `` PG_DB=allprj ./sh/rust_by_year.sh ``, `` PG_DB=allprj ./sh/rust_by_year_cum.sh `` on the reporting pod.
 
 And then `` ./sh/get_rust_by_year.sh `` locally.
