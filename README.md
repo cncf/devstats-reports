@@ -244,3 +244,9 @@ Locally:
 For over-time (yearly) report use: `` PG_DB=allprj ./sh/rust_by_year.sh ``, `` PG_DB=allprj ./sh/rust_by_year_cum.sh `` on the reporting pod.
 
 And then `` ./sh/get_rust_by_year.sh `` locally.
+
+
+# Project Country stats
+
+While in the reporting pod:
+- `` PG_DB=allprj ./sh/top_project_country_contributors.sh 'United States' 'Chaos Mesh' '10 years' ``.
