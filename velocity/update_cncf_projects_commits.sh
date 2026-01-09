@@ -34,7 +34,7 @@ do
   then
     continue
   fi
-  name=`db.sh psql "$db" -tAc "select value_s from gha_vars where name = 'full_name'"`
+  name=`db.sh psql "$db" -P pager=off -tAc "select value_s from gha_vars where name = 'full_name'"`
   echo "${db} -> ${name}"
   ./velocity/get_git_commits_count.sh "${db}" "${from}" "${to}"
   commits=`cat commits.txt`

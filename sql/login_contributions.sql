@@ -1,4 +1,6 @@
-with data as (
+select
+  count(distinct s.event_id) as contributions
+from (
   select
     event_id
   from
@@ -33,8 +35,4 @@ with data as (
       'PushEvent', 'PullRequestEvent', 'IssuesEvent', 'PullRequestReviewEvent',
       'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
     )
-)
-select
-  count(distinct event_id) as contributions
-from
-  data
+  ) s
