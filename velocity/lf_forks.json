@@ -12370,6 +12370,7 @@
   "jenkinsci/javancss-plugin": false,
   "hyperledger/fabric-x-committer": false,
   "jenkinsci/arestocats-plugin": false,
+<<<<<<< HEAD
   "jenkinsci/svn-partial-release-mgr-plugin": true,
   "flatcar/garm-provider-linode": false,
   "zephyrproject-rtos/libjaylink": false,
@@ -12779,3 +12780,7 @@
   "kuberhealthy/python": false,
   "kube-logging/fluent-plugin-elasticsearch": true
 }
+=======
+  "jenkinsci/svn-partial-release-mgr-plugin": true
+}
+>>>>>>> 264d46bab9dd308566e0bc84bc4caaad395c8de9

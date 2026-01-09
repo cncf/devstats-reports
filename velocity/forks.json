@@ -9760,6 +9760,7 @@
   "kubestellar/presentations": false,
   "konveyor/tackle2-addon-platform": false,
   "WasmEdge/homebrew": false,
+<<<<<<< HEAD
   "bfenetworks/bfe-mock-waf": false,
   "flatcar/garm-provider-linode": false,
   "robusta-dev/holmesgpt": false,
@@ -10176,3 +10177,7 @@
   "kuberhealthy/python": false,
   "kube-logging/fluent-plugin-elasticsearch": true
 }
+=======
+  "bfenetworks/bfe-mock-waf": false
+}
+>>>>>>> 264d46bab9dd308566e0bc84bc4caaad395c8de9
